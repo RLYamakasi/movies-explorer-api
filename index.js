@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const routesUser = require('./routes/users');
-const errorHandler = require('./middlewares/handler');
+const { errorHandler } = require('./middlewares/handler');
 const cookieParser = require('cookie-parser');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { corsCheck } = require('./middlewares/cors')
