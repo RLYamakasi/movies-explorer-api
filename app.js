@@ -9,7 +9,7 @@ const { corsCheck } = require('./middlewares/cors')
 const {register, login} = require('./controllers/users')
 const { auth } = require('./middlewares/auth');
 const NotFound = require('./errors/notfound');
-const { userValidateLogin, userValidateRegistration } = require('./Validations/user');
+const { userValidateLogin, userValidateRegistration } = require('./validations/user');
 const app = express();
 
 app.use(corsCheck);
