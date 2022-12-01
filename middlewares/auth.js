@@ -15,7 +15,6 @@ module.exports.auth = (req, res, next) => {
     req.user = tokenCheck;
     return next();
   } catch (err) {
-    console.log(err)
     return next(new ErrorLogin('Что-то пошло не так'));
   }
 };

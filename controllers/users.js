@@ -6,10 +6,8 @@ const BadRequestError = require('../errors/badreq');
 const AuthError = require('../errors/autherror');
 const ErrorLogin = require('../errors/errorlogin');
 
-console.log(process.env.JWT_SECRET);
-
 module.exports.aboutMe = (req,res,next)=>{
-  Users,findOne({ id: req.user._id})
+  Users.findOne({ id: req.user._id})
     .then((user)=> res.send(user))
     .catch(next);
 }
