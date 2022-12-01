@@ -13,7 +13,7 @@ const { userValidateLogin, userValidateRegistration } = require('./validations/u
 const app = express();
 
 app.use(corsCheck);
-app.use(express.json())
+app.use(express.json());
 app.use(cookieParser());
 
 mongoose.connect('mongodb://localhost:27017/bitfilmsdb', (err) => {
