@@ -32,7 +32,7 @@ module.exports.createMovie=(req,res,next)=>{
 }
 
 module.exports.deleteMovie=(req,res,next)=>{
-  Movies.findById(req.params.movieId)
+  Movies.findById(req.params._id)
     .then((movies) => {
       if (!movies) {
         return next(new NotFound('фильм не найден'));
