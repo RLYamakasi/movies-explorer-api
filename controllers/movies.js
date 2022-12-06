@@ -29,7 +29,7 @@ module.exports.createMovie=(req,res,next)=>{
 }
 
 module.exports.deleteMovie=(req,res,next)=>{
-  Movies.findById(req.params.cardId)
+  Movies.findById(req.params.movieId)
     .then((movie) => {
       if (!movies) {
         return next(new NotFound('фильм не найден'));
