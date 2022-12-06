@@ -9,7 +9,7 @@ module.exports.getMovies=(req,res,next)=>{
 
 module.exports.createMovie=(req,res,next)=>{
   const{country, director, duration, year, description, image, nameRU, nameEN, thumbnail, movieId, trailerLink} = req.body
-  const owner = 'req.user._id';
+  const owner = req.user._id;
   Movies.create({country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId, owner})
   .then(() => res.send({
     country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId
@@ -29,7 +29,7 @@ module.exports.createMovie=(req,res,next)=>{
 }
 
 module.exports.deleteMovie=(req,res,next)=>{
-  Movies.findById(req.params.movieId)
+  Movies.findById(req.params.cardId)
     .then((movie) => {
       if (!movies) {
         return next(new NotFound('фильм не найден'));
