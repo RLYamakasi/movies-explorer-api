@@ -16,7 +16,7 @@ module.exports.createMovie=(req,res,next)=>{
     country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId
   }))
   .catch((err) => {
-    console.log(err)
+    res.send(err);
     if (err.name === 'ValidationError') {
       res.send(err);
       console.log(err)
