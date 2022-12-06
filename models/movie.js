@@ -40,6 +40,15 @@ const movieSchema = new mongoose.Schema({
       }
     },
   },
+  trailerLink: {
+    type:String,
+    required: true,
+    validate(value){
+      if(!validator.isURL(value)){
+        throw new Error('некорректная ссылка')
+      }
+    },
+  },
   owner: {
     type:mongoose.Schema.Types.ObjectId,
     ref: 'user',

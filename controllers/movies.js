@@ -8,14 +8,16 @@ module.exports.getMovies=(req,res,next)=>{
 }
 
 module.exports.createMovie=(req,res,next)=>{
-  const{country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId} = req.body
-  movies.create({country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId})
+  const{country, director, duration, year, description, image, nameRU, nameEN, thumbnail, movieId, trailerLink} = req.body
+  movies.create({country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId})
   .then(() => res.send({
-    country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId
+    country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId
   }))
   .catch((err) => {
+    console.log(err)
     if (err.name === 'ValidationError') {
       res.send(err);
+      console.log(err)
       return next(new BadRequestError('Что-то пошло не так'));
     }
     if (err.code === 11000) {
