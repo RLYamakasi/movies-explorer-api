@@ -1,4 +1,7 @@
 const Movies = require('../models/movie')
+const BadRequestError = require('../errors/badreq');
+const AuthError = require('../errors/autherror');
+const NotFound = require('../errors/notfound');
 
 module.exports.getMovies=(req,res,next)=>{
   Movies.find({})
@@ -29,7 +32,7 @@ module.exports.createMovie=(req,res,next)=>{
 }
 
 module.exports.deleteMovie=(req,res,next)=>{
-  Movies.findById(req.params.moviesId)
+  Movies.findById(req.params.movieId)
     .then((movies) => {
       if (!movies) {
         return next(new NotFound('фильм не найден'));

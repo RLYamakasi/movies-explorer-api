@@ -6,8 +6,8 @@ module.exports = router;
 
 router.get('/movies', getMovies);
 router.post('/movies', movieValidateCreate, createMovie);
-router.delete('/movies/:movieId', celebrate({
+router.delete('/movies/:_id', celebrate({
   [Segments.PARAMS]: Joi.object().keys({
-    movieId: Joi.number().required(),
+    _id: Joi.string().length(24).hex().required(),
   }),
 }), deleteMovie);
