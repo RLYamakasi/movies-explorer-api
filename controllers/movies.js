@@ -1,15 +1,17 @@
-const movies = require('../models/movie')
+const Movies = require('../models/movie')
 
 module.exports.getMovies=(req,res,next)=>{
-  movies.find({})
-    .then((user)=>res.send(user))
+  Movies.find({})
+    .then((movie)=>res.send(movie))
     .catch(next)
 
 }
 
 module.exports.createMovie=(req,res,next)=>{
   const{country, director, duration, year, description, image, nameRU, nameEN, thumbnail, movieId, trailerLink} = req.body
-  movies.create({country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId})
+  const owner = req.user._id;
+  console.log(req.user._id)
+  Movies.create({country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId, owner})
   .then(() => res.send({
     country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId
   }))
@@ -28,16 +30,16 @@ module.exports.createMovie=(req,res,next)=>{
 }
 
 module.exports.deleteMovie=(req,res,next)=>{
-  Cards.findById(req.params.cardId)
-    .then((cards) => {
-      if (!cards) {
+  Movies.findById(req.params.cardId)
+    .then((movie) => {
+      if (!movies) {
         return next(new NotFound('фильм не найден'));
       }
-      if (!cards.owner.equals(req.user._id)) {
+      if (!movies.owner.equals(req.user._id)) {
         return next(new ForbidenError('Нельзя удалить чужой фильм'));
       }
-      return cards.remove()
-        .then(() => res.status(200).send(cards));
+      return Movies.remove()
+        .then(() => res.status(200).send(movies));
     })
     .catch(next);
 }
