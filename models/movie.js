@@ -15,7 +15,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   year: {
-    type:String,
+    type:Number,
     required: true,
   },
   description: {
@@ -40,13 +40,22 @@ const movieSchema = new mongoose.Schema({
       }
     },
   },
+  trailerLink: {
+    type:String,
+    required: true,
+    validate(value){
+      if(!validator.isURL(value)){
+        throw new Error('некорректная ссылка')
+      }
+    },
+  },
   owner: {
     type:mongoose.Schema.Types.ObjectId,
     ref: 'user',
     required: true,
   },
   movieId: {
-    type:mongoose.Schema.Types.ObjectId,
+    type: Number,
     required: true,
   },
   nameRU: {
@@ -58,3 +67,5 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
 })
+
+module.exports = mongoose.model('movies', movieSchema);

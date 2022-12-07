@@ -22,6 +22,10 @@ exports.movieValidateCreate = celebrate({
       .messages({
         'string.empty': 'Поле "description" должно быть заполнено',
       }),
+      trailerLink: Joi.string().required().pattern(/^(http|https):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i)
+      .messages({
+        'string.empty': 'Поле "trailerLink" должно быть заполнено',
+      }),
       image: Joi.string().required().pattern(/^(http|https):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i)
       .messages({
         'string.empty': 'Поле "image" должно быть заполнено',
@@ -37,6 +41,10 @@ exports.movieValidateCreate = celebrate({
       nameEN: Joi.string().required()
       .messages({
         'string.empty': 'Поле "nameEN" должно быть заполнено',
+      }),
+      movieId: Joi.string().required()
+      .messages({
+        'string.empty': 'Поле "movieId" должно быть заполнено',
       }),
   }),
 });
