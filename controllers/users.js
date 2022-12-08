@@ -1,22 +1,22 @@
 require('dotenv').config();
-const Users = require('../models/user');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Users = require('../models/user');
 const BadRequestError = require('../errors/badreq');
 const AuthError = require('../errors/autherror');
 const ErrorLogin = require('../errors/errorlogin');
 
-module.exports.aboutMe = (req,res,next)=>{
-  Users.findOne({ id: req.user._id})
-    .then((user)=> res.send(user))
+module.exports.aboutMe = (req, res, next) => {
+  Users.findOne({ id: req.user._id })
+    .then((user) => res.send(user))
     .catch(next);
-}
+};
 
 module.exports.patchUserInfo = (req, res, next) => {
-  const { name } = req.body;
+  const { name, email } = req.body;
   Users.findByIdAndUpdate(
     req.user._id,
-    { name},
+    { name, email },
     {
       new: true,
       runValidators: true,
@@ -33,7 +33,6 @@ module.exports.patchUserInfo = (req, res, next) => {
 };
 
 module.exports.register = (req, res, next) => {
-  console.log(req.body)
   const {
     name, email, password,
   } = req.body;
@@ -58,7 +57,6 @@ module.exports.register = (req, res, next) => {
     });
 };
 
-
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   Users.findOne({ email }).select('+password')
@@ -76,9 +74,8 @@ module.exports.login = (req, res, next) => {
             sameSite: false,
             httpOnly: true,
           });
-          console.log(req.user)
           return res.send({ token });
         });
     })
     .catch(next);
-  }
+};

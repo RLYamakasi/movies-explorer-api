@@ -1,56 +1,56 @@
 const mongoose = require('mongoose');
-const validator = require('validator')
+const validator = require('validator');
 
 const movieSchema = new mongoose.Schema({
   country: {
-    type:String,
+    type: String,
     required: true,
   },
   director: {
-    type:String,
+    type: String,
     required: true,
   },
   duration: {
-    type:Number,
+    type: Number,
     required: true,
   },
   year: {
-    type:Number,
+    type: String,
     required: true,
   },
   description: {
-    type:String,
+    type: String,
     required: true,
   },
   image: {
-    type:String,
+    type: String,
     required: true,
-    validate(value){
-      if(!validator.isURL(value)){
-        throw new Error('некорректная ссылка')
+    validate(value) {
+      if (!validator.isURL(value)) {
+        throw new Error('некорректная ссылка');
       }
     },
   },
   thumbnail: {
-    type:String,
+    type: String,
     required: true,
-    validate(value){
-      if(!validator.isURL(value)){
-        throw new Error('некорректная ссылка')
+    validate(value) {
+      if (!validator.isURL(value)) {
+        throw new Error('некорректная ссылка');
       }
     },
   },
   trailerLink: {
-    type:String,
+    type: String,
     required: true,
-    validate(value){
-      if(!validator.isURL(value)){
-        throw new Error('некорректная ссылка')
+    validate(value) {
+      if (!validator.isURL(value)) {
+        throw new Error('некорректная ссылка');
       }
     },
   },
   owner: {
-    type:mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
     required: true,
   },
@@ -59,13 +59,13 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   nameRU: {
-    type:String,
+    type: String,
     required: true,
   },
   nameEN: {
-    type:String,
+    type: String,
     required: true,
   },
-})
+});
 
 module.exports = mongoose.model('movies', movieSchema);
