@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
     validate(value) {
-      if (!validator.isEmail(value)){
-        throw new Error('некорректный email')
+      if (!validator.isEmail(value)) {
+        throw new Error('некорректный email');
       }
     },
   },
@@ -17,12 +17,12 @@ const userSchema = new mongoose.Schema({
     required: true,
     select: false,
   },
-  name:{
+  name: {
     type: String,
-    required:true,
-    minlength:2,
-    maxlength:30,
-  }
-})
+    required: true,
+    minlength: 2,
+    maxlength: 30,
+  },
+});
 
 module.exports = mongoose.model('users', userSchema);
