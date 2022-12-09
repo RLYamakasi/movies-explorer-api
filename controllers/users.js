@@ -9,7 +9,13 @@ const ErrorLogin = require('../errors/errorlogin');
 module.exports.aboutMe = (req, res, next) => {
   Users.findOne({ id: req.user._id })
     .then((user) => res.send(user))
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        next(new BadRequestError('Что-то пошло не так'));
+      } else {
+        next(err);
+      }
+    });
 };
 
 module.exports.patchUserInfo = (req, res, next) => {
@@ -26,6 +32,9 @@ module.exports.patchUserInfo = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Что-то пошло не так'));
+      }
+      if (err.code === 11000) {
+        next(new AuthError('Email зарегистрирован'));
       } else {
         next(err);
       }

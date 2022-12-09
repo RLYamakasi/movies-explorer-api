@@ -6,11 +6,11 @@ const ErrorLogin = require('../errors/errorlogin');
 module.exports.auth = (req, res, next) => {
   const cookie = req.cookies.token;
   try {
-    const { NODE_ENV = 'development', JWT_SECRET } = process.env;
-    const tokenCheck = jwt.verify(cookie, NODE_ENV === 'production' ? JWT_SECRET : 'supersecretkey');
+    const { NODE_ENV, JWT_SECRET } = process.env;
+    const tokenCheck = jwt.verify(cookie, NODE_ENV === 'production' ? JWT_SECRET : JWT_SECRET);
     req.user = tokenCheck;
     return next();
   } catch (err) {
-    return next(new ErrorLogin('Что-то пошло не так'));
+    return next(new ErrorLogin('Ошибка авторизации'));
   }
 };
