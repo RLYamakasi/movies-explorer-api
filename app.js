@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const routesUser = require('./routes/users');
 const routesMovie = require('./routes/movies');
@@ -23,6 +24,7 @@ const app = express();
 
 app.use(limiter);
 app.use(corsCheck);
+app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
 
@@ -43,4 +45,4 @@ mongoose.connect('mongodb://localhost:27017/moviesdb', () => {
   app.use('/', errorHandler);
 });
 
-app.listen(3001);
+app.listen(3000);
