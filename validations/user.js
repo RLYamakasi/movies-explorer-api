@@ -1,10 +1,13 @@
-const { celebrate, Joi } = require('celebrate');
+const { celebrate, Joi, Segments } = require('celebrate');
 
 exports.userValidateRegistration = celebrate({
-  body: Joi.object().keys({
+  [Segments.BODY]: Joi.object().keys({
     email: Joi.string().required().email()
       .messages({
+        'string.base': 'Поле должно содержать почту',
+        'validation.failed': 'Поле должно содержать почту',
         'string.empty': 'Поле "email" должно быть заполнено',
+        'any.required': 'Поле "email" должно быть заполнено',
       }),
     password: Joi.string().required()
       .messages({
@@ -20,9 +23,10 @@ exports.userValidateRegistration = celebrate({
 });
 
 exports.userValidateLogin = celebrate({
-  body: Joi.object().keys({
+  [Segments.BODY]: Joi.object().keys({
     email: Joi.string().required().email()
       .messages({
+        'string.base': 'Поле должно содержать почту',
         'string.empty': 'Поле "email" должно быть заполнено',
       }),
     password: Joi.string().required()

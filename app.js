@@ -11,7 +11,6 @@ const { corsCheck } = require('./middlewares/cors');
 const { register, login } = require('./controllers/users');
 const { auth } = require('./middlewares/auth');
 const NotFound = require('./errors/notfound');
-const { userValidateLogin, userValidateRegistration } = require('./validations/user');
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -30,8 +29,9 @@ app.use(cookieParser());
 
 mongoose.connect('mongodb://localhost:27017/moviesdb', () => {
   app.use(requestLogger);
-  app.post('/signup', userValidateRegistration, register);
-  app.post('/signin', userValidateLogin, login);
+  app.use('/', errorHandler);
+  app.post('/signup', register);
+  app.post('/signin', login);
   app.post('/signout', (req, res) => {
     res
       .clearCookie('token').status(200).send({ message: 'Вы успешно вышли из системы!' });
@@ -42,7 +42,6 @@ mongoose.connect('mongodb://localhost:27017/moviesdb', () => {
     next(new NotFound('Маршрут не найден'));
   });
   app.use(errorLogger);
-  app.use('/', errorHandler);
 });
 
 app.listen(3000);
