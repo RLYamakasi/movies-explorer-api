@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { NODE_ENV = 'development' } = process.env;
+const { NODE_ENV = 'development', JWT_SECRET = 'some-defaut-value' } = process.env;
 const jwt = require('jsonwebtoken');
 const ErrorLogin = require('../errors/errorlogin');
 
@@ -11,6 +11,7 @@ module.exports.auth = (req, res, next) => {
     req.user = tokenCheck;
     return next();
   } catch (err) {
+    console.log(err)
     return next(new ErrorLogin('Ошибка авторизации'));
   }
 };

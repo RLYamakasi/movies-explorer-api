@@ -21,6 +21,7 @@ const limiter = rateLimit({
 
 const app = express();
 
+app.use(requestLogger);
 app.use(limiter);
 app.use(corsCheck);
 app.use(helmet());
@@ -28,7 +29,6 @@ app.use(express.json());
 app.use(cookieParser());
 
 mongoose.connect('mongodb://localhost:27017/moviesdb', () => {
-  app.use(requestLogger);
   app.use('/', errorHandler);
   app.post('/signup', register);
   app.post('/signin', login);
