@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const routesUser = require('./routes/users');
-const routesMovie = require('./routes/movies');
+const routes = require('./routes/index');
 const { errorHandler } = require('./middlewares/handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { corsCheck } = require('./middlewares/cors');
@@ -36,8 +35,7 @@ mongoose.connect(adress, () => {
     res
       .clearCookie('token').status(200).send({ message: 'Вы успешно вышли из системы!' });
   });
-  app.use('/', auth, routesUser);
-  app.use('/', auth, routesMovie);
+  app.use('/', auth, routes);
   app.use(auth, (req, res, next) => {
     next(new NotFound('Маршрут не найден'));
   });
