@@ -4,8 +4,6 @@ const { NODE_ENV = 'development', JWT_SECRET = 'some-defaut-value' } = process.e
 const jwt = require('jsonwebtoken');
 const ErrorLogin = require('../errors/errorlogin');
 
-console.log(NODE_ENV,JWT_SECRET )
-
 module.exports.auth = (req, res, next) => {
   const cookie = req.cookies.token;
   try {
