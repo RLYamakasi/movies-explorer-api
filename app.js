@@ -41,7 +41,7 @@ mongoose.connect(adress, () => {
     next(new NotFound('Маршрут не найден'));
   });
   app.use(errorLogger);
-  app.use('/', errorHandler);
+  // app.use('/', errorHandler);
 });
 
 app.listen(3000);
