@@ -12,6 +12,7 @@ const { auth } = require('./middlewares/auth');
 const NotFound = require('./errors/notfound');
 const { adress } = require('./constants/mongoAdress');
 
+console.log(adress)
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
