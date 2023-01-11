@@ -6,7 +6,7 @@ const { movieValidateCreate, movieValidateDelete } = require('../validations/mov
 module.exports = router;
 
 router.get('/movies', getMovies);
-router.post('/movies',movieValidateCreate, createMovie);
+router.post('/movies', createMovie);
 router.delete('/movies/:_id', movieValidateDelete, deleteMovie);
 router.get('/users/me', aboutMe);
 router.patch('/users/me', patchUserInfo);
