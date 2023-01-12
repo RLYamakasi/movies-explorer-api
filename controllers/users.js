@@ -5,13 +5,16 @@ const Users = require('../models/user');
 const BadRequestError = require('../errors/badreq');
 const AuthError = require('../errors/autherror');
 const ErrorLogin = require('../errors/errorlogin');
+const {
+  errorSomeThingWrong, errorValidation, errorEmailAlredyReg, errorRegistration,
+} = require('../constants/errors');
 
 module.exports.aboutMe = (req, res, next) => {
   Users.findOne({ id: req.user._id })
     .then((user) => res.send(user))
     .catch((err) => {
-      if (err.name === 'ValidationError') {
-        next(new BadRequestError('Что-то пошло не так'));
+      if (err.name === errorValidation) {
+        next(new BadRequestError(errorSomeThingWrong));
       } else {
         next(err);
       }
@@ -30,11 +33,11 @@ module.exports.patchUserInfo = (req, res, next) => {
   )
     .then((user) => res.send(user))
     .catch((err) => {
-      if (err.name === 'ValidationError') {
-        next(new BadRequestError('Что-то пошло не так'));
+      if (err.name === errorValidation) {
+        next(new BadRequestError(errorSomeThingWrong));
       }
       if (err.code === 11000) {
-        next(new AuthError('Email зарегистрирован'));
+        next(new AuthError(errorEmailAlredyReg));
       } else {
         next(err);
       }
@@ -55,12 +58,12 @@ module.exports.register = (req, res, next) => {
       name, email,
     }))
     .catch((err) => {
-      if (err.name === 'ValidationError') {
+      if (err.name === errorValidation) {
         res.send(err);
-        return next(new BadRequestError('Что-то пошло не так'));
+        return next(new BadRequestError(errorSomeThingWrong));
       }
       if (err.code === 11000) {
-        return next(new AuthError('Email зарегистрирован'));
+        return next(new AuthError(errorEmailAlredyReg));
       }
       return next(err);
     });
@@ -71,12 +74,12 @@ module.exports.login = (req, res, next) => {
   Users.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        return next(new ErrorLogin('Неверный логин или пароль'));
+        return next(new ErrorLogin(errorRegistration));
       }
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            return next(new ErrorLogin('Неправильные почта или пароль'));
+            return next(new ErrorLogin(errorRegistration));
           }
           const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
           res.cookie('token', token, {

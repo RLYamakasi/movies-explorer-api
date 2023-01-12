@@ -1,4 +1,4 @@
-const { celebrate, Joi } = require('celebrate');
+const { celebrate, Joi, Segments } = require('celebrate');
 
 exports.movieValidateCreate = celebrate({
   body: Joi.object().keys({
@@ -46,5 +46,11 @@ exports.movieValidateCreate = celebrate({
       .messages({
         'string.empty': 'Поле "movieId" должно быть заполнено',
       }),
+  }),
+});
+
+exports.movieValidateDelete = celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
+    _id: Joi.string().length(24).hex().required(),
   }),
 });
