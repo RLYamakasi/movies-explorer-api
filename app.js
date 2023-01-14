@@ -7,15 +7,18 @@ const { errorHandler } = require('./middlewares/handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { corsCheck } = require('./middlewares/cors');
 const { adress } = require('./constants/mongoAdress');
+const { limiter } = require('./modules/rateLimiter');
 
 const app = express();
 
 app.use(requestLogger);
-// app.use(limiter);
+app.use(limiter);
 app.use(corsCheck);
 app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
+
+mongoose.set('strictQuery', true);
 
 mongoose.connect(adress, () => {
   app.use('/', routes);

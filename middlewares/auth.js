@@ -2,7 +2,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { errorAuthorization } = require('../constants/errors');
 
-const { JWT_SECRET = 'super-secret' } = process.env;
+const { NODE_ENV = 'devolepment', JWT_SECRET = 'super-secret' } = process.env;
 const ErrorLogin = require('../errors/errorlogin');
 
 module.exports.auth = (req, res, next) => {
