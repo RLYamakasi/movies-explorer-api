@@ -28,4 +28,4 @@ mongoose.connect(adress, (err) => {
   app.use('/', errorHandler);
 });
 
-app.listen(3002);
+app.listen(3000);
