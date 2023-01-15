@@ -12,6 +12,6 @@ module.exports.auth = (req, res, next) => {
     req.user = tokenCheck;
     return next();
   } catch (err) {
-    return next(new ErrorLogin(errorAuthorization));
+    return next(new ErrorLogin('jib,rf'));
   }
 };
