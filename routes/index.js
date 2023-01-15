@@ -9,10 +9,10 @@ const { messageSignOut } = require('../constants/messages');
 
 module.exports = router;
 
-router.use('/', auth, routesMovie);
-router.use('/', auth, routesUser);
 router.post('/signup', register);
 router.post('/signin', login);
+router.use('/', auth, routesMovie);
+router.use('/', auth, routesUser);
 router.post('/signout', auth, (req, res) => {
   res
     .clearCookie('token').status(200).send({ message: messageSignOut });
