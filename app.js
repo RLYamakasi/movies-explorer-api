@@ -18,11 +18,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
 
-mongoose.set('strictQuery', true);
-
-mongoose.connect(adress, (err) => {
-  if (!err) console.log('сервер запущен');
-  else console.log('ошибка');
+mongoose.connect(adress, () => {
   app.use('/', routes);
   app.use(errorLogger);
   app.use('/', errorHandler);

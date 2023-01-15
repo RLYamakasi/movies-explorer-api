@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const { NODE_ENV = 'development', JWT_SECRET = 'some-defaut-value' } = process.env;
 const jwt = require('jsonwebtoken');
 const { errorAuthorization } = require('../constants/errors');
