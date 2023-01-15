@@ -20,10 +20,12 @@ app.use(cookieParser());
 
 mongoose.set('strictQuery', true);
 
-mongoose.connect(adress, () => {
+mongoose.connect(adress, (err) => {
+  if (!err) console.log('сервер запущен');
+  else console.log('ошибка');
   app.use('/', routes);
   app.use(errorLogger);
   app.use('/', errorHandler);
 });
 
-app.listen(3000);
+app.listen(3002);
