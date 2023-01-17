@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const { errorInvalidUrl } = require('../constants/errors');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -27,7 +28,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate(value) {
       if (!validator.isURL(value)) {
-        throw new Error('некорректная ссылка');
+        throw new Error(errorInvalidUrl);
       }
     },
   },
@@ -36,7 +37,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate(value) {
       if (!validator.isURL(value)) {
-        throw new Error('некорректная ссылка');
+        throw new Error(errorInvalidUrl);
       }
     },
   },
@@ -45,7 +46,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate(value) {
       if (!validator.isURL(value)) {
-        throw new Error('некорректная ссылка');
+        throw new Error(errorInvalidUrl);
       }
     },
   },

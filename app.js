@@ -1,5 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const routes = require('./routes/index');
@@ -18,9 +20,10 @@ app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
 
-mongoose.connect(adress, () => {
+mongoose.connect(process.env.MONGO_ADRESS || adress, () => {
   app.use('/', routes);
   app.use(errorLogger);
+  app.use(errors());
   app.use('/', errorHandler);
 });
 

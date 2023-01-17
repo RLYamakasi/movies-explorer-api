@@ -6,18 +6,15 @@ const BadRequestError = require('../errors/badreq');
 const AuthError = require('../errors/autherror');
 const ErrorLogin = require('../errors/errorlogin');
 const {
-  errorSomeThingWrong, errorValidation, errorEmailAlredyReg, errorRegistration,
+  errorInvalidData, errorValidation, errorEmailAlredyReg, errorRegistration,
 } = require('../constants/errors');
+const { secretKey } = require('../constants/authconstants');
 
 module.exports.aboutMe = (req, res, next) => {
   Users.findOne({ id: req.user._id })
     .then((user) => res.send(user))
     .catch((err) => {
-      if (err.name === errorValidation) {
-        next(new BadRequestError(errorSomeThingWrong));
-      } else {
-        next(err);
-      }
+      next(err);
     });
 };
 
@@ -34,7 +31,7 @@ module.exports.patchUserInfo = (req, res, next) => {
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === errorValidation) {
-        next(new BadRequestError(errorSomeThingWrong));
+        next(new BadRequestError(errorInvalidData));
       }
       if (err.code === 11000) {
         next(new AuthError(errorEmailAlredyReg));
@@ -60,7 +57,7 @@ module.exports.register = (req, res, next) => {
     .catch((err) => {
       if (err.name === errorValidation) {
         res.send(err);
-        return next(new BadRequestError(errorSomeThingWrong));
+        return next(new BadRequestError(errorInvalidData));
       }
       if (err.code === 11000) {
         return next(new AuthError(errorEmailAlredyReg));
@@ -81,7 +78,7 @@ module.exports.login = (req, res, next) => {
           if (!matched) {
             return next(new ErrorLogin(errorRegistration));
           }
-          const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+          const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET || secretKey, { expiresIn: '7d' });
           res.cookie('token', token, {
             sameSite: false,
             httpOnly: true,

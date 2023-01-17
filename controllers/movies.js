@@ -3,7 +3,7 @@ const BadRequestError = require('../errors/badreq');
 const NotFound = require('../errors/notfound');
 const ForbidenError = require('../errors/forbiddenerror');
 const {
-  errorSomeThingWrong, errorValidation, errorNotFoundFilm, errorCantDeleteFilm,
+  errorInvalidData, errorValidation, errorNotFoundFilm, errorCantDeleteFilm,
 } = require('../constants/errors');
 
 module.exports.getMovies = (req, res, next) => {
@@ -19,7 +19,7 @@ module.exports.createMovie = (req, res, next) => {
     }))
     .catch((err) => {
       if (err.name === errorValidation) {
-        return next(new BadRequestError(errorSomeThingWrong));
+        return next(new BadRequestError(errorInvalidData));
       }
       return next(err);
     });

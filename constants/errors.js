@@ -1,6 +1,8 @@
-const errorSomeThingWrong = 'Что-то пошло не так';
+const errorInvalidData = 'Неверных данные';
+const errorInvalidEmail = 'некорректный email';
+const errorInvalidUrl = 'некорректный url';
 const errorValidation = 'ValidationError';
-const errorNotFoundFilm = 'фильм не найден';
+const errorNotFoundFilm = 'Фильм не найден';
 const errorCantDeleteFilm = 'Нельзя удалить чужой фильм';
 const errorEmailAlredyReg = 'Email зарегистрирован';
 const errorRegistration = 'Неверный логин или пароль';
@@ -9,7 +11,7 @@ const errorAuthorization = 'Ошибка авторизации';
 const errorServer = 'На сервере произошла ошибка';
 
 module.exports = {
-  errorSomeThingWrong,
+  errorInvalidData,
   errorValidation,
   errorNotFoundFilm,
   errorCantDeleteFilm,
@@ -18,4 +20,6 @@ module.exports = {
   errorRoute,
   errorAuthorization,
   errorServer,
+  errorInvalidEmail,
+  errorInvalidUrl,
 };

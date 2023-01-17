@@ -6,11 +6,13 @@ const { auth } = require('../middlewares/auth');
 const NotFound = require('../errors/notfound');
 const { errorRoute } = require('../constants/errors');
 const { messageSignOut } = require('../constants/messages');
+const { userValidateRegistration } = require('../validations/user');
+const { userValidateLogin } = require('../validations/user');
 
 module.exports = router;
 
-router.post('/signup', register);
-router.post('/signin', login);
+router.post('/signup', userValidateRegistration, register);
+router.post('/signin', userValidateLogin, login);
 router.use('/', auth, routesMovie);
 router.use('/', auth, routesUser);
 router.post('/signout', auth, (req, res) => {
