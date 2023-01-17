@@ -11,7 +11,7 @@ const {
 const { secretKey } = require('../constants/authconstants');
 
 module.exports.aboutMe = (req, res, next) => {
-  Users.findOne({ id: req.user._id })
+  Users.findOne({ _id: req.user._id })
     .then((user) => res.send(user))
     .catch((err) => {
       next(err);
