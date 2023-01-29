@@ -1,0 +1,7 @@
+.navbar__films{
+    grid-area: a-side;
+    margin: auto auto;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+}

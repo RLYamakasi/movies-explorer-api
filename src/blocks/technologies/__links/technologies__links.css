@@ -1,0 +1,11 @@
+.technologies__links{
+    margin: 100px auto;
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.04em;
+}

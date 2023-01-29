@@ -1,0 +1,6 @@
+.info__links{
+    display: flex;
+    justify-content:space-evenly;
+    width: 40%;
+    margin: 15vh auto 0;
+}

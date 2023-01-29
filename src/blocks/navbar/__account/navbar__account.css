@@ -1,0 +1,10 @@
+.navbar__account{
+    grid-area: d-side;
+    margin: auto auto;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    background: #F9F9F9;
+    border-radius: 20px;
+    padding: 8px 20px;
+}

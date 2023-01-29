@@ -1,0 +1,7 @@
+.time-info__time-line{
+    display: grid;
+    grid-template-areas: "backend frontend"
+                         "backend-text frontend-text";
+    grid-template-columns: 1fr 4fr;
+    text-align: center;
+}

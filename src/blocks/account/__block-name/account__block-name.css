@@ -1,0 +1,7 @@
+.account__block-name{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 16;
+    border-bottom: 1px solid #E8E8E8;
+}

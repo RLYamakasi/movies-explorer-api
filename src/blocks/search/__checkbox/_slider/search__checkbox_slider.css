@@ -1,0 +1,30 @@
+/* .search__checkbox_slider{
+    display: inline-block;
+    position: relative;
+
+}
+
+.search__checkbox_slider::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 36px;
+    height: 20px;
+    background-color: #2BE080;
+    border-radius: 50px;
+}
+   
+.search__checkbox_slider::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    background-color: white;
+    left:1px;
+    top:1px;
+}
+ */

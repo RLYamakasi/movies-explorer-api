@@ -1,0 +1,5 @@
+.student__image{
+    height: 320px;
+    grid-area: img;
+    border-radius: 10px;
+}
