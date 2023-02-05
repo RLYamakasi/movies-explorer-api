@@ -1,7 +1,11 @@
 .technologies__link{
     background: #E8E8E8;
     border-radius: 10px;
-    height: 40px;
-    width: 90px;
-    padding-top: 20px;
+    padding: 21px 30px;
+}
+
+@media screen and (max-width:1024px){
+    .technologies__link {
+        max-width: 90%; 
+    }
 }

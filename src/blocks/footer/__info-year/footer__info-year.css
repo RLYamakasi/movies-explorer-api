@@ -3,3 +3,9 @@
     font-size: 13px;
     line-height: 16px;
 }
+
+@media screen and (max-width:767px){
+    .footer__info-year {
+        color: #A0A0A0;
+    }
+}

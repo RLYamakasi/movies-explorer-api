@@ -1,6 +1,12 @@
 .info__links{
     display: flex;
     justify-content:space-evenly;
-    width: 40%;
+    width: 50%;
     margin: 15vh auto 0;
+}
+
+@media screen and (max-width:767px){
+    .info__links {
+        width: 100%;
+    }
 }

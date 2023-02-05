@@ -3,20 +3,21 @@ import search from "../images/search.svg"
 import find from "../images/find.svg"
 import favorite from "../images/favorite.svg"
 import randomPic from "../images/randompic.png"
+import { Link } from "react-router-dom";
 const Films = (props) => {
     return(
     <main>
         <nav className="navbar">
             <div className="navbar__avatar">
-                <img src={logo} className="profile__avatar-img"/>
+                <img src={logo} className="profile__avatar-img" alt="логотип"/>
             </div>
-            <a className="navbar__films">Фильмы</a>
-            <a className="navbar__saved-films">Сохранённые фильмы</a>
-            <a className="navbar__account">Аккаунт</a>
+            <Link to="/movies" className="navbar__films">Фильмы</Link>
+            <Link to="/saved-movies" className="navbar__saved-films">Сохранённые фильмы</Link>
+            <Link to="/profile" className="navbar__account">Аккаунт</Link>
         </nav>
         <section className="search">
         <label className="search__label">
-            <img src={search} className="search__icon"/>
+            <img src={search} className="search__icon" alt="иконка поиска"/>
             <input
             type="url"
             className="search__films"
@@ -24,10 +25,9 @@ const Films = (props) => {
             placeholder="Фильм"
             required
             />
-            <img src={find} className="search__button"></img>
+            <img src={find} className="search__button" alt="кнопка искать"></img>
             <label className="search__checkbox">
                 <input className="search__checkbox_input" type="checkbox" id="checkbox"/>
-                {/* <span class="search__checkbox_slider" for="checkbox"></span> */}
             </label>
             <p className="search__checkbox-text">Короткометражки</p>
         <span id="url-error" className="search__error">

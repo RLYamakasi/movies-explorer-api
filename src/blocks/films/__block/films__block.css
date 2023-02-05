@@ -1,5 +1,6 @@
 .films__block{
     display: grid;
+    margin: 0 auto;
     grid-template-areas: "title ico"
                          "subtitle ico"
                          "img img";

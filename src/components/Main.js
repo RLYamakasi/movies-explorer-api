@@ -1,15 +1,16 @@
 import logo from "../images/logo.svg"
 import link from "../images/link.svg"
 import me from "../images/me.jpg"
+import { Link } from "react-router-dom";
 const Main = (props) => {
     return(
         <main>
             <nav className="navbar">
                 <div className="navbar__avatar">
-                    <img src={logo} className="profile__avatar-img"/>
+                    <img src={logo} className="profile__avatar-img" alt="логотип"/>
                 </div>
-                <a className="navbar__registration">Регистрация</a>
-                <button className="navbar__login">Войти</button>
+                <Link to="signup" className="navbar__registration">Регистрация</Link>
+                <Link to="signin" className="navbar__login">Войти</Link>
             </nav>
             <section className="info">
                 <h1 className="info__title">Учебный проект студента факультета Веб-разработки.</h1>

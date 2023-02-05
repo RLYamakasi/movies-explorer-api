@@ -2,3 +2,9 @@
     grid-area: logo;
     margin: 0 auto;
 }
+
+@media screen and (max-width:1024px){
+    .navbar__avatar{
+        margin: 0;
+    }
+}

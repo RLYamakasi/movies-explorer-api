@@ -5,3 +5,11 @@
     font-size: 18px;
     line-height: 20px;
 }
+
+@media screen and (max-width:767px){
+    .portfolio {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 28px;
+    }
+}

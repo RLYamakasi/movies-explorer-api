@@ -13,19 +13,19 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/main" element={<Main/>}>
+        <Route path="/" element={<Main/>}>
         </Route>
-        <Route path="/films" element={<Films/>}>
+        <Route path="/movies" element={<Films/>}>
         </Route>
-        <Route path="/saved-films" element={<SavedFilms/>}>
+        <Route path="/saved-movies" element={<SavedFilms/>}>
         </Route>
-        <Route path="/registration" element={<Registration/>}>
+        <Route path="/signup" element={<Registration/>}>
         </Route>
-        <Route path="/login" element={<Login/>}>
+        <Route path="/signin" element={<Login/>}>
         </Route>
         <Route path="/error" element={<Error/>}>
         </Route>
-        <Route path="/account" element={<Account/>}>
+        <Route path="/profile" element={<Account/>}>
         </Route>
       </Routes>
     </div>

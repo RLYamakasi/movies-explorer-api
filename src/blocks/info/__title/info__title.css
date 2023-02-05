@@ -8,3 +8,13 @@
     margin: 0 auto;
     text-align: center;
 }
+
+@media screen and (max-width:767px){
+    .info__title {
+        font-weight: 400;
+        font-size: 29px;
+        line-height: 37px;
+        text-align: center;
+        letter-spacing: -0.04em;
+    }
+}

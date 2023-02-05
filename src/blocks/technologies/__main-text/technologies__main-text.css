@@ -5,5 +5,16 @@
     line-height: 58px;
     text-align: center;
     letter-spacing: -0.04em;
-    width: 430px;
+    max-width: 430px;
+}
+
+@media screen and (max-width:768px){
+    .technologies__main-text {
+        margin: 60px auto 24px;
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 36px;
+        text-align: center;
+        letter-spacing: -0.04em;
+    }
 }

@@ -1,10 +1,10 @@
 import logo from "../images/logo.svg"
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Registration = (props) => {
     return(
     <main>
         <section className="registration">
-            <img className="registration__logo" src={logo}/>
+            <img className="registration__logo" src={logo} alt="логотип"/>
             <h1 className="registration__title">Добро пожаловать!</h1>
         <label className="registration__label">
             <p className="registration__text">Имя</p>
@@ -50,7 +50,7 @@ const Registration = (props) => {
           >
             Зарегистрироваться
         </button>
-        <Link to="sign-in" className="registration__content-links">
+        <Link to="/signin" className="registration__content-links">
           <p className="registration__content">Уже зарегистрированы?</p>
           <p className="registration__content">Войти</p>
         </Link>

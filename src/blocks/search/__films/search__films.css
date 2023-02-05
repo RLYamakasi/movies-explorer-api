@@ -8,5 +8,12 @@
 
 .search__films:focus{
     border: none;
-    outline: none;
+    outline: 3px solid #E8E8E8;
 }
+
+@media screen and (max-width:767px){
+    .search__films{
+        padding-left: 20px;
+    }
+}
+

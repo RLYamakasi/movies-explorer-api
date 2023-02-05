@@ -1,14 +1,15 @@
 import logo from "../images/logo.svg"
+import { Link } from "react-router-dom";
 const Account=()=>{
     return(
         <main>
             <nav className="navbar">
             <div className="navbar__avatar">
-                <img src={logo} className="profile__avatar-img"/>
+                <img src={logo} className="profile__avatar-img" alt="логотип"/>
             </div>
-            <a className="navbar__films">Фильмы</a>
-            <a className="navbar__saved-films">Сохранённые фильмы</a>
-            <a className="navbar__account">Аккаунт</a>
+            <Link to="/movies" className="navbar__films">Фильмы</Link>
+            <Link to="/saved-movies" className="navbar__saved-films">Сохранённые фильмы</Link>
+            <Link to="/profile" className="navbar__account">Аккаунт</Link>
             </nav>
             <section className="account">
                 <h1 className="account__title">Привет, Алексей!</h1>

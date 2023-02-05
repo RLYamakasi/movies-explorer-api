@@ -3,3 +3,11 @@
     grid-area: img;
     border-radius: 10px;
 }
+
+@media screen and (max-width:767px){
+    .student__image {
+        margin: 0 auto;
+        height: 100%;
+        width: 100%;
+    }
+}

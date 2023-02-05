@@ -9,3 +9,13 @@
     border-bottom: 1px solid;
     padding-bottom: 23px;
 }
+
+@media screen and (max-width:768px){
+    .technologies__title {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        letter-spacing: -0.04em;
+        padding-top: 70px;
+    }
+}

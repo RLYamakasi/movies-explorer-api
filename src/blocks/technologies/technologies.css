@@ -2,5 +2,11 @@
     width: 100%;
     background: #F5F5F5;
     margin: 110px auto 0;
-    height: 625px;
+    height: 650px;
+}
+
+@media screen and (max-width:767px){
+    .technologies {
+        height: 651px;
+    }
 }

@@ -5,3 +5,11 @@
     text-align: center;
     letter-spacing: -0.04em;
 }
+
+@media screen and (max-width:768px){
+    .technologies__text {
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 16px;
+    }
+}

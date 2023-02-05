@@ -2,3 +2,14 @@
     display: flex;
     justify-content: space-between;
 }
+
+
+@media screen and (max-width:768px){
+    .footer__info {
+        border-top: #E8E8E8 1px solid;
+        padding-top: 30px;
+        display: flex;
+        flex-direction:column-reverse;
+        align-items: center;
+    }
+}

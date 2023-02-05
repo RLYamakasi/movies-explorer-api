@@ -4,4 +4,18 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 18px;
+    text-decoration: none;
+    color: #000;
+    transition: .4s;
+}
+
+.navbar__films:hover{
+    opacity: .7;
+}
+
+@media screen and (max-width:1024px){
+    .navbar__films{
+        opacity: 0;
+        display: none;
+    }
 }

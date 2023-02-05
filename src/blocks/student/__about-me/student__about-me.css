@@ -6,3 +6,13 @@
                          "git-link img";
     margin-top: 66px;
 }
+
+@media screen and (max-width:767px){
+    .student__about-me {
+        grid-template-areas: "img"
+                            "name"
+                         "age-prof"
+                         "main-info"
+                         "git-link";
+    }
+}

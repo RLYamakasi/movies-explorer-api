@@ -2,3 +2,7 @@
     display: inline-block;
     margin: auto 14px auto 29px;
 }
+
+.search__checkbox:last-child{
+    display:none;
+}
