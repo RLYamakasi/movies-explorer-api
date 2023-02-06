@@ -1,10 +1,10 @@
-.navbar__avatar{
-    grid-area: logo;
-    margin: 0 auto;
+.navbar__avatar {
+  grid-area: logo;
+  margin: auto 0;
 }
 
-@media screen and (max-width:1024px){
-    .navbar__avatar{
-        margin: 0;
-    }
+@media screen and (max-width: 1024px) {
+  .navbar__avatar {
+    margin: 0;
+  }
 }

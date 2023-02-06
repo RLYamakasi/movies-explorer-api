@@ -6,6 +6,7 @@
 @import url(./blocks/navbar/__avatar-img/navbar__avatar-img.css);
 @import url(./blocks/navbar/__registration/navbar__registration.css);
 @import url(./blocks/navbar/__login/navbar__login.css);
+@import url(./blocks/navbar/__login/_text/navbar__login_text.css);
 @import url(./blocks/navbar/__account/navbar__account.css);
 @import url(./blocks/navbar/__films/navbar__films.css);
 @import url(./blocks/navbar/__saved-films/navbar__saved-films.css);
@@ -54,6 +55,7 @@
 @import url(./blocks/search/__label/search__label.css);
 @import url(./blocks/search/__icon/search__icon.css);
 @import url(./blocks/search/__button/search__button.css);
+@import url(./blocks/search/__button/_img/search__button_img.css);
 @import url(./blocks/search/__checkbox/search__checkbox.css);
 @import url(./blocks/search/__checkbox/_input/search__checkbox_input.css);
 @import url(./blocks/search/__checkbox-text/search__checkbox-text.css);
@@ -68,7 +70,9 @@
 @import url(./blocks/more/more.css);
 @import url(./blocks/more/__button/more__button.css);
 @import url(./blocks/registration/registration.css);
+@import url(./blocks/registration/__header/registration__header.css);
 @import url(./blocks/registration/__logo/registration__logo.css);
+@import url(./blocks/registration/__main/registration__main.css);
 @import url(./blocks/registration/__title/registration__title.css);
 @import url(./blocks/registration/__text/registration__text.css);
 @import url(./blocks/registration/__label/registration__label.css);

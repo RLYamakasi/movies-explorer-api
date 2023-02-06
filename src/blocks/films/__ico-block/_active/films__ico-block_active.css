@@ -1,5 +1,6 @@
 .films__ico-block_active{
     grid-area: ico;
+    border: none;
     margin: auto auto;
     background: #2BE080;
     border-radius: 36px;
@@ -8,4 +9,5 @@
     display: flex;
     justify-content: center;
     align-content: center;
+    cursor: pointer;
 }

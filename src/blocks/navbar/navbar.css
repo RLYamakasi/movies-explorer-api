@@ -1,18 +1,16 @@
-.navbar{
-    display: grid;
-    width: 90%;
-    margin: 0 auto;
-    grid-template-areas: "logo a-side b-side . c-side d-side";
-    grid-template-columns: repeat(6, 1fr);
-    height: 74px;
-    align-content: center;
-    text-align: center;
+.navbar {
+  display: grid;
+  width: 85%;
+  margin: 0 auto;
+  grid-template-areas: "logo a-side b-side . c-side d-side";
+  grid-template-columns: 0.4fr 1fr 2fr 8fr 1fr 1fr;
+  height: 74px;
 }
 
-@media screen and (max-width:767px){
-    .navbar {
-        grid-template-areas: "logo . c-side d-side";
-        grid-template-columns: repeat(4, 1fr);
-        gap:14px;
-    }
+@media screen and (max-width: 767px) {
+  .navbar {
+    grid-template-areas: "logo . c-side d-side";
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
 }
