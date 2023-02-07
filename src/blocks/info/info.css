@@ -1,7 +1,8 @@
-.info{
-    background: #F5F5F5;
-    border-radius: 10px;
-    width: 90%;
-    margin: 0 auto;
-    height: 493px;
+.info {
+  position: relative;
+  background: #f5f5f5;
+  border-radius: 10px;
+  width: 90%;
+  margin: 0 auto;
+  height: 493px;
 }

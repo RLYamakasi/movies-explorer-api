@@ -6,11 +6,17 @@
   letter-spacing: -0.04em;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
+  .technologies__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 767px) {
   .technologies__text {
     width: 80%;
     margin: 0 auto;
-    font-weight: 400;
     font-size: 11px;
     line-height: 16px;
   }

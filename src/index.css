@@ -31,6 +31,7 @@
 @import url(./blocks/technologies/__text/technologies__text.css);
 @import url(./blocks/technologies/__links/technologies__links.css);
 @import url(./blocks/technologies/__link/technologies__link.css);
+@import url(./blocks/technologies/__link/_text/technologies__link_text.css);
 @import url(./blocks/student/student.css);
 @import url(./blocks/student/__title/student__title.css);
 @import url(./blocks/student/__about-me/student__about-me.css);

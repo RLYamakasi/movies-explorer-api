@@ -54,25 +54,49 @@ const SavedFilms = () => {
             <p className="films__text-block">33 слова о дизайне</p>
             <p className="films__time-block">1ч 47м</p>
             <button className="films__ico-block">
-              <img className="films__ico-block_img" src={closeicon} />
+              <img
+                className="films__ico-block_img"
+                src={closeicon}
+                alt="иконка-удалить"
+              />
             </button>
-            <img className="films__img-block" src={randomPic} />
+            <img
+              className="films__img-block"
+              src={randomPic}
+              alt="изображение фильма"
+            />
           </div>
           <div className="films__block">
             <p className="films__text-block">33 слова о дизайне</p>
             <p className="films__time-block">1ч 47м</p>
             <button className="films__ico-block">
-              <img className="films__ico-block_img" src={closeicon} />
+              <img
+                className="films__ico-block_img"
+                src={closeicon}
+                alt="иконка-удалить"
+              />
             </button>
-            <img className="films__img-block" src={randomPic} />
+            <img
+              className="films__img-block"
+              src={randomPic}
+              alt="изображение фильма"
+            />
           </div>
           <div className="films__block">
             <p className="films__text-block">33 слова о дизайне</p>
             <p className="films__time-block">1ч 47м</p>
             <button className="films__ico-block">
-              <img className="films__ico-block_img" src={closeicon} />
+              <img
+                className="films__ico-block_img"
+                src={closeicon}
+                alt="иконка-удалить"
+              />
             </button>
-            <img className="films__img-block" src={randomPic} />
+            <img
+              className="films__img-block"
+              src={randomPic}
+              alt="изображение фильма"
+            />
           </div>
         </section>
       </main>

@@ -1,21 +1,26 @@
 .technologies__links {
-  margin: 100px auto;
+  position: absolute;
   display: flex;
   gap: 10px;
   justify-content: center;
-  text-align: center;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  letter-spacing: -0.04em;
+  bottom: 100px;
+  width: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .technologies__links {
+    bottom: 90px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .technologies__links {
+    left: 25%;
     width: 50%;
+    position: absolute;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin: 50px auto;
+    bottom: 70px;
     gap: 10px;
   }
 }

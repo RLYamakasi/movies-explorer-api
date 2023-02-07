@@ -52,11 +52,13 @@ const Registration = () => {
         <button className="registration__save-button">
           Зарегистрироваться
         </button>
+      </main>
+      <footer>
         <Link to="/signin" className="registration__content-links">
           <p className="registration__content">Уже зарегистрированы?</p>
           <p className="registration__content">Войти</p>
         </Link>
-      </main>
+      </footer>
     </section>
   );
 };

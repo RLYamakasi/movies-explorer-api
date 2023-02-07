@@ -1,9 +1,23 @@
-.time-info__backend-part{
-    grid-area: backend;
-    font-weight: 400;
+.time-info__backend-part {
+  grid-area: backend;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  background: #2be080;
+  height: 28px;
+  padding-top: 8px;
+}
+
+@media screen and (max-width: 1024px) {
+  .time-info__backend-part {
     font-size: 14px;
     line-height: 17px;
-    background: #2BE080;
-    height: 28px;
-    padding-top: 8px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .time-info__backend-part {
+    font-size: 11px;
+    line-height: 20px;
+  }
 }

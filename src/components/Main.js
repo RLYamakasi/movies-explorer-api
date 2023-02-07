@@ -69,13 +69,27 @@ const Main = (props) => {
             дипломном проекте.
           </div>
           <div className="technologies__links">
-            <a className="technologies__link">HTML</a>
-            <a className="technologies__link">CSS</a>
-            <a className="technologies__link">JS</a>
-            <a className="technologies__link">React</a>
-            <a className="technologies__link">Git</a>
-            <a className="technologies__link">Express.js</a>
-            <a className="technologies__link">mongoDB</a>
+            <div className="technologies__link">
+              <a className="technologies__link_text">HTML</a>
+            </div>
+            <div className="technologies__link">
+              <a className="technologies__link_text">CSS</a>
+            </div>
+            <div className="technologies__link">
+              <a className="technologies__link_text">JS</a>
+            </div>
+            <div className="technologies__link">
+              <a className="technologies__link_text">React</a>
+            </div>
+            <div className="technologies__link">
+              <a className="technologies__link_text">Git</a>
+            </div>
+            <div className="technologies__link">
+              <a className="technologies__link_text">Express.js</a>
+            </div>
+            <div className="technologies__link">
+              <a className="technologies__link_text">mongoDB</a>
+            </div>
           </div>
         </section>
         <section className="student">
@@ -92,7 +106,7 @@ const Main = (props) => {
               веб-разработчиком.
             </p>
             <p className="student__git-link">Github</p>
-            <img className="student__image" src={me} />
+            <img className="student__image" src={me} alt="изображение меня" />
           </div>
         </section>
         <section className="portfolio">
@@ -101,41 +115,56 @@ const Main = (props) => {
             <a
               href="https://github.com/RLYamakasi/how-to-learn"
               className="portfolio__link"
+              target="_blank"
             >
               <p className="portfolio__link_text">Статичный сайт</p>
-              <img className="portfolio__link_img" src={link} />
+              <img
+                className="portfolio__link_img"
+                src={link}
+                alt="иконка-ссылка Статичный сайт"
+              />
             </a>
             <a
               href="https://github.com/RLYamakasi/russian-travel"
               className="portfolio__link"
+              target="_blank"
             >
               <p className="portfolio__link_text">Адаптивный сайт</p>
-              <img className="portfolio__link_img" src={link} />
+              <img
+                className="portfolio__link_img"
+                src={link}
+                alt="иконка-ссылка Адаптивный сайт"
+              />
             </a>
             <a
               href="https://github.com/RLYamakasi/react-mesto-api-full"
               className="portfolio__link"
+              target="_blank"
             >
               <p className="portfolio__link_text">Одностраничное приложение</p>
-              <img className="portfolio__link_img" src={link} />
+              <img
+                className="portfolio__link_img"
+                src={link}
+                alt="иконка-ссылка Одностраничное приложение"
+              />
             </a>
           </div>
         </section>
-        <footer className="footer">
-          <p className="footer__title">
-            Учебный проект Яндекс.Практикум х BeatFilm.
-          </p>
-          <div className="footer__info">
-            <div className="footer__info-year">
-              <p>© 2023</p>
-            </div>
-            <div className="footer__info-other">
-              <p>Яндекс.Практикум</p>
-              <p>Github</p>
-            </div>
-          </div>
-        </footer>
       </main>
+      <footer className="footer">
+        <p className="footer__title">
+          Учебный проект Яндекс.Практикум х BeatFilm.
+        </p>
+        <div className="footer__info">
+          <div className="footer__info-year">
+            <p>© 2023</p>
+          </div>
+          <div className="footer__info-other">
+            <p>Яндекс.Практикум</p>
+            <p>Github</p>
+          </div>
+        </div>
+      </footer>
     </section>
   );
 };

@@ -1,7 +1,21 @@
-.portfolio__title{
-    font-weight: 400;
+.portfolio__title {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #a0a0a0;
+  margin-bottom: 50px;
+}
+
+@media screen and (max-width: 1024px) {
+  .portfolio__title {
     font-size: 18px;
     line-height: 20px;
-    color: #A0A0A0;
-    margin-bottom: 50px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+  }
 }

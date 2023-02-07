@@ -1,4 +1,5 @@
-.navbar__avatar-img{
-    height: 38px;
-    width: 38px;
+.navbar__avatar-img {
+  height: 38px;
+  width: 38px;
+  margin: auto 0;
 }

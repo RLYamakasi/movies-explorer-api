@@ -36,6 +36,7 @@ const Account = () => {
           <p className="account__content">Выйти из аккаунта</p>
         </section>
       </main>
+      <footer></footer>
     </section>
   );
 };

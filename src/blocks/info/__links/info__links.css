@@ -1,12 +1,15 @@
 .info__links {
+  position: absolute;
   display: flex;
   gap: 10px;
   justify-content: center;
-  margin: 15vh auto 0;
+  bottom: 30px;
+  width: 100%;
 }
 
 @media screen and (max-width: 767px) {
   .info__links {
     gap: 6px;
+    bottom: 17px;
   }
 }
