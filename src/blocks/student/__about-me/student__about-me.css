@@ -1,8 +1,0 @@
-.student__about-me{
-    display: grid;
-    grid-template-areas: "name img"
-                         "age-prof img"
-                         "main-info img"
-                         "git-link img";
-    margin-top: 66px;
-}
