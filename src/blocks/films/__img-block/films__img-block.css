@@ -1,4 +1,5 @@
 .films__img-block {
   grid-area: img;
   width: 100%;
+  height: 203px;
 }

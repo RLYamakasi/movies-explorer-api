@@ -4,8 +4,36 @@ import find from "../images/find.svg";
 import closeicon from "../images/closeIcon.svg";
 import randomPic from "../images/randompic.png";
 import { Link } from "react-router-dom";
+import ico_main from "../images/ico-main.svg";
+import ico_exit from "../images/exit-ico.svg";
+import { React, useEffect, useState } from "react";
+import { api } from "../utils/MainApi";
 
 const SavedFilms = () => {
+  const [isSideBarOpen, setSideBarOpen] = useState(false);
+  const [savedMovies, setSavedMovies] = useState([]);
+  const OpenSideBar = () => {
+    setSideBarOpen(true);
+  };
+  const CloseSideBar = () => {
+    setSideBarOpen(false);
+  };
+
+  const DeleteMovies = (id) => {
+    api
+      .DeleteMovie(id)
+      .then((data) => {})
+      .then(() => {
+        setSavedMovies((movies) => movies.filter((item) => item._id !== id));
+      });
+  };
+
+  useEffect(() => {
+    api.getMovies().then((data) => {
+      setSavedMovies(data);
+    });
+  }, []);
+
   return (
     <section>
       <header>
@@ -22,6 +50,40 @@ const SavedFilms = () => {
           <Link to="/profile" className="navbar__account">
             Аккаунт
           </Link>
+          <img
+            className="navbar__side-ico"
+            src={ico_main}
+            onClick={OpenSideBar}
+          />
+        </nav>
+        <nav
+          className={
+            isSideBarOpen
+              ? "navbar-side navbar-side_active"
+              : "navbar-side navbar-side_inactive"
+          }
+        >
+          <div className="navbar-side__block">
+            <img
+              src={ico_exit}
+              className="navbar-side__exit"
+              onClick={CloseSideBar}
+            />
+            <div className="navbar-side__text-block">
+              <Link to="/" className="navbar-side__text">
+                Главная
+              </Link>
+              <Link to="/movies" className="navbar-side__text">
+                Фильмы
+              </Link>
+              <Link to="/saved-movies" className="navbar-side__text">
+                Сохранённые фильмы
+              </Link>
+              <Link to="/profile" className="navbar-side__text">
+                Аккаунт
+              </Link>
+            </div>
+          </div>
         </nav>
       </header>
       <main>
@@ -50,54 +112,27 @@ const SavedFilms = () => {
           </form>
         </section>
         <section className="films">
-          <div className="films__block">
-            <p className="films__text-block">33 слова о дизайне</p>
-            <p className="films__time-block">1ч 47м</p>
-            <button className="films__ico-block">
+          {savedMovies.map((obj, i) => (
+            <div key={obj._id} className="films__block">
+              <p className="films__text-block">{obj.nameRU}</p>
+              <p className="films__time-block">{obj.duration}</p>
+              <button
+                className="films__ico-block"
+                onClick={() => DeleteMovies(obj._id)}
+              >
+                <img
+                  className="films__ico-block_img"
+                  src={closeicon}
+                  alt="иконка-удалить"
+                />
+              </button>
               <img
-                className="films__ico-block_img"
-                src={closeicon}
-                alt="иконка-удалить"
+                className="films__img-block"
+                src={obj.image}
+                alt="изображение фильма"
               />
-            </button>
-            <img
-              className="films__img-block"
-              src={randomPic}
-              alt="изображение фильма"
-            />
-          </div>
-          <div className="films__block">
-            <p className="films__text-block">33 слова о дизайне</p>
-            <p className="films__time-block">1ч 47м</p>
-            <button className="films__ico-block">
-              <img
-                className="films__ico-block_img"
-                src={closeicon}
-                alt="иконка-удалить"
-              />
-            </button>
-            <img
-              className="films__img-block"
-              src={randomPic}
-              alt="изображение фильма"
-            />
-          </div>
-          <div className="films__block">
-            <p className="films__text-block">33 слова о дизайне</p>
-            <p className="films__time-block">1ч 47м</p>
-            <button className="films__ico-block">
-              <img
-                className="films__ico-block_img"
-                src={closeicon}
-                alt="иконка-удалить"
-              />
-            </button>
-            <img
-              className="films__img-block"
-              src={randomPic}
-              alt="изображение фильма"
-            />
-          </div>
+            </div>
+          ))}
         </section>
       </main>
       <footer className="footer">

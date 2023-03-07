@@ -1,0 +1,7 @@
+.navbar-side__block {
+  right: 0;
+  position: absolute;
+  background: white;
+  width: 70%;
+  height: 100%;
+}

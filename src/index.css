@@ -10,6 +10,14 @@
 @import url(./blocks/navbar/__account/navbar__account.css);
 @import url(./blocks/navbar/__films/navbar__films.css);
 @import url(./blocks/navbar/__saved-films/navbar__saved-films.css);
+@import url(./blocks/navbar/__side-ico/navbar__side-ico.css);
+@import url(./blocks/navbar-side/navbar-side.css);
+@import url(./blocks/navbar-side/__text/navbar-side__text.css);
+@import url(./blocks/navbar-side/__block/navbar-side__block.css);
+@import url(./blocks/navbar-side/__exit/navbar-side__exit.css);
+@import url(./blocks/navbar-side/__text-block/navbar-side__text-block.css);
+@import url(./blocks/navbar-side/_active/navbar-side_active.css);
+@import url(./blocks/navbar-side/_inactive/navbar-side_inactive.css);
 @import url(./blocks/info/info.css);
 @import url(./blocks/info/__title/info__title.css);
 @import url(./blocks/info/__links/info__links.css);
@@ -70,6 +78,7 @@
 @import url(./blocks/films/__ico-block/_img/films__ico-block_img.css);
 @import url(./blocks/more/more.css);
 @import url(./blocks/more/__button/more__button.css);
+@import url(./blocks/more/__button/_vanished/more__button_vanished.css);
 @import url(./blocks/registration/registration.css);
 @import url(./blocks/registration/__header/registration__header.css);
 @import url(./blocks/registration/__logo/registration__logo.css);
@@ -96,3 +105,5 @@
 @import url(./blocks/account/__block-email/_text/account__block-email_text.css);
 @import url(./blocks/account/__block-email/_value/account__block-email_value.css);
 @import url(./blocks/account/__content/account__content.css);
+@import url(./blocks/account/__input/account__input.css);
+@import url(./blocks/account/__label/account__label.css);
