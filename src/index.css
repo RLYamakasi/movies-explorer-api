@@ -1,6 +1,17 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/inter.css);
 @import url(./blocks/page/page.css);
+@import url(./blocks/pop-up/pop-up.css);
+@import url(./blocks/pop-up/_hiden/pop-up_hiden.css);
+@import url(./blocks/pop-up/__block/pop-up__block.css);
+@import url(./blocks/pop-up/__img/pop-up__img.css);
+@import url(./blocks/preloader/preloader.css);
+@import url(./blocks/preloader/_hiden/preloader_hiden.css);
+@import url(./blocks/preloader/__loader/preloader__loader.css);
+@import url(./blocks/preloader/__percents/preloader__percents.css);
+@import url(./blocks/preloader/__spiner/preloader__spiner.css);
+@import url(./blocks/preloader/__box/preloader__box.css);
+@import url(./blocks/preloader/_animation/preloader_animation.css);
 @import url(./blocks/navbar/navbar.css);
 @import url(./blocks/navbar/__avatar/navbar__avatar.css);
 @import url(./blocks/navbar/__avatar-img/navbar__avatar-img.css);
@@ -73,6 +84,7 @@
 @import url(./blocks/films/__text-block/films__text-block.css);
 @import url(./blocks/films/__time-block/films__time-block.css);
 @import url(./blocks/films/__img-block/films__img-block.css);
+@import url(./blocks/films/__img-block/_link/films__img-block_link.css);
 @import url(./blocks/films/__ico-block/films__ico-block.css);
 @import url(./blocks/films/__ico-block/_active/films__ico-block_active.css);
 @import url(./blocks/films/__ico-block/_img/films__ico-block_img.css);
@@ -97,6 +109,7 @@
 @import url(./blocks/error/__exit/error__exit.css);
 @import url(./blocks/account/account.css);
 @import url(./blocks/account/__title/account__title.css);
+@import url(./blocks/account/__block-error/account__block-error.css);
 @import url(./blocks/account/__block/account__block.css);
 @import url(./blocks/account/__block-name/account__block-name.css);
 @import url(./blocks/account/__block-name/_text/account__block-name_text.css);
@@ -105,5 +118,6 @@
 @import url(./blocks/account/__block-email/_text/account__block-email_text.css);
 @import url(./blocks/account/__block-email/_value/account__block-email_value.css);
 @import url(./blocks/account/__content/account__content.css);
+@import url(./blocks/account/__content/_unactive/account__content_unactive.css);
 @import url(./blocks/account/__input/account__input.css);
 @import url(./blocks/account/__label/account__label.css);

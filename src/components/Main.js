@@ -2,7 +2,17 @@ import logo from "../images/logo.svg";
 import link from "../images/link.svg";
 import me from "../images/me.jpg";
 import { Link } from "react-router-dom";
+import { React, useState } from "react";
 const Main = (props) => {
+  const [isSideBarOpen, setSideBarOpen] = useState(false);
+
+  const OpenSideBar = () => {
+    setSideBarOpen(true);
+  };
+  const CloseSideBar = () => {
+    setSideBarOpen(false);
+  };
+
   return (
     <section>
       <header>
@@ -10,12 +20,33 @@ const Main = (props) => {
           <Link to="/" className="navbar__avatar">
             <img src={logo} className="profile__avatar-img" alt="логотип" />
           </Link>
-          <Link to="signup" className="navbar__registration">
-            Регистрация
-          </Link>
-          <Link to="signin" className="navbar__login">
-            <p className="navbar__login_text">Войти</p>
-          </Link>
+          {props.loggedIn ? (
+            <Link to="/movies" className="navbar__films">
+              Фильмы
+            </Link>
+          ) : (
+            <Link to="signup" className="navbar__registration">
+              Регистрация
+            </Link>
+          )}
+          {props.loggedIn ? (
+            <Link to="/saved-movies" className="navbar__saved-films">
+              Сохранённые
+            </Link>
+          ) : (
+            <Link to="signin" className="navbar__login">
+              <p className="navbar__login_text">Войти</p>
+            </Link>
+          )}
+          {props.loggedIn ? (
+            <Link to="/profile" className="navbar__account">
+              Аккаунт
+            </Link>
+          ) : (
+            <Link to="signin" className="navbar__login">
+              <p className="navbar__login_text">Войти</p>
+            </Link>
+          )}
         </nav>
       </header>
       <main>

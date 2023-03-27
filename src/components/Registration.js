@@ -2,6 +2,7 @@ import logo from "../images/logo.svg";
 import { Link, withRouter, useNavigate } from "react-router-dom";
 import { React, useEffect, useState } from "react";
 import { api } from "../utils/MainApi";
+import { apiMovie } from "../utils/MoviesApi";
 
 const Registration = (props) => {
   const navigate = useNavigate();
@@ -33,8 +34,36 @@ const Registration = (props) => {
       .register(userValue.name, userValue.password, userValue.email)
       .then((data) => {
         if (data) {
-          console.log(data);
-          navigate("/signin");
+          api
+            .login(userValue.password, userValue.email)
+            .then((data) => {
+              if (data) {
+                Promise.all([api.getProfile(), apiMovie.getMovies()]).then(
+                  ([infoResult, moviesResult]) => {
+                    props.setСurrentUser({
+                      name: infoResult.name,
+                      email: infoResult.email,
+                      id: infoResult._id,
+                    });
+                    localStorage.setItem(
+                      "AllFilms",
+                      JSON.stringify(moviesResult.reverse())
+                    );
+                    localStorage.setItem(
+                      "ShortFilms",
+                      JSON.stringify(
+                        moviesResult.filter((item) => item.duration <= 40)
+                      )
+                    );
+                    props.setLoggedIn(true);
+                    navigate("/movies");
+                  }
+                );
+              }
+            })
+            .catch((err) => {
+              setError({ password: "Что-то пошло не так..." });
+            });
         }
       })
       .catch((err) => {

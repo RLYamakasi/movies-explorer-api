@@ -1,0 +1,7 @@
+.pop-up_hiden {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s linear;
+}

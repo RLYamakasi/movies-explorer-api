@@ -2,16 +2,17 @@ import logo from "../images/logo.svg";
 import search from "../images/search.svg";
 import find from "../images/find.svg";
 import closeicon from "../images/closeIcon.svg";
-import randomPic from "../images/randompic.png";
 import { Link } from "react-router-dom";
 import ico_main from "../images/ico-main.svg";
 import ico_exit from "../images/exit-ico.svg";
-import { React, useEffect, useState } from "react";
-import { api } from "../utils/MainApi";
+import { React, useState } from "react";
 
-const SavedFilms = () => {
+const SavedFilms = (props) => {
   const [isSideBarOpen, setSideBarOpen] = useState(false);
-  const [savedMovies, setSavedMovies] = useState([]);
+  const [searchContent, setSearchContent] = useState({
+    movie: "",
+  });
+  const [isLoading, setLoading] = useState(false);
   const OpenSideBar = () => {
     setSideBarOpen(true);
   };
@@ -19,20 +20,53 @@ const SavedFilms = () => {
     setSideBarOpen(false);
   };
 
-  const DeleteMovies = (id) => {
-    api
-      .DeleteMovie(id)
-      .then((data) => {})
-      .then(() => {
-        setSavedMovies((movies) => movies.filter((item) => item._id !== id));
-      });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSearchContent({
+      [name]: value,
+    });
   };
 
-  useEffect(() => {
-    api.getMovies().then((data) => {
-      setSavedMovies(data);
-    });
-  }, []);
+  const shortFilms = () => {
+    if (props.isShortFilms === true) {
+      props.setShortFilms(false);
+      localStorage.setItem("isShort", props.isShortFilms);
+      props.SearchSavedFilter();
+    } else {
+      props.setShortFilms(true);
+      localStorage.setItem("isShort", props.isShortFilms);
+      props.SearchSavedFilter();
+    }
+  };
+
+  const searchFilms = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      JSON.parse(localStorage.getItem("AllFilms")).map((obj) => {
+        obj.nameRU.split(" ").some((movie) => {
+          if (searchContent.movie.length === 0) {
+            localStorage.removeItem("SearchFilm");
+            props.SearchSavedFilter();
+          } else if (
+            movie.toLowerCase() === searchContent.movie.toLowerCase()
+          ) {
+            localStorage.setItem("SearchFilm", JSON.stringify(obj));
+            props.SearchSavedFilter();
+          }
+        });
+      });
+      setLoading(false);
+    }, 600);
+  };
+
+  const DeleteMovies = (id) => {
+    console.log(
+      props.setSavedMovies(props.savedMovies.filter((movie) => movie.id !== id))
+    );
+
+    localStorage.setItem("FavoriteMovie", JSON.stringify(props.savedMovies));
+  };
 
   return (
     <section>
@@ -91,13 +125,20 @@ const SavedFilms = () => {
           <form className="search__label">
             <img src={search} className="search__icon" alt="иконка поиска" />
             <input
-              type="url"
+              name="movie"
+              onChange={handleChange}
+              type="search"
+              value={searchContent.movie}
               className="search__films"
-              id="url"
               placeholder="Фильм"
               required
             />
-            <button src={find} className="search__button" alt="кнопка искать">
+            <button
+              src={find}
+              onClick={searchFilms}
+              className="search__button"
+              alt="кнопка искать"
+            >
               <img
                 src={find}
                 className="search__button_img"
@@ -105,20 +146,32 @@ const SavedFilms = () => {
               ></img>
             </button>
             <label className="search__checkbox">
-              <input className="search__checkbox_input" type="checkbox" />
+              <input
+                onChange={() => shortFilms()}
+                className="search__checkbox_input"
+                type="checkbox"
+                id="checkbox"
+              />
             </label>
             <p className="search__checkbox-text">Короткометражки</p>
             <span id="url-error" className="search__error"></span>
           </form>
         </section>
         <section className="films">
-          {savedMovies.map((obj, i) => (
-            <div key={obj._id} className="films__block">
+          {props.savedMovies.map((obj, i) => (
+            <div key={obj.id} className="films__block">
               <p className="films__text-block">{obj.nameRU}</p>
-              <p className="films__time-block">{obj.duration}</p>
+              <p className="films__time-block">
+                {Math.floor(obj.duration / 60) > 0
+                  ? Math.floor(obj.duration / 60) +
+                    " час " +
+                    (obj.duration % 60) +
+                    " минут"
+                  : (obj.duration % 60) + " минут"}
+              </p>
               <button
                 className="films__ico-block"
-                onClick={() => DeleteMovies(obj._id)}
+                onClick={() => DeleteMovies(obj.id)}
               >
                 <img
                   className="films__ico-block_img"
@@ -128,7 +181,7 @@ const SavedFilms = () => {
               </button>
               <img
                 className="films__img-block"
-                src={obj.image}
+                src={"https://api.nomoreparties.co/" + obj.image.url}
                 alt="изображение фильма"
               />
             </div>

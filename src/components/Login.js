@@ -6,7 +6,7 @@ import { apiMovie } from "../utils/MoviesApi";
 
 const Login = (props) => {
   const navigate = useNavigate();
-
+  const [isLoading, setLoading] = useState(false);
   const [isValid, setValid] = useState({
     email: "",
     password: "",
@@ -31,36 +31,68 @@ const Login = (props) => {
     });
   };
 
+  const login = () => {
+    Promise.all([api.getProfile(), apiMovie.getMovies()])
+      .then(([infoResult, moviesResult]) => {
+        props.setСurrentUser({
+          name: infoResult.name,
+          email: infoResult.email,
+          id: infoResult._id,
+        });
+        localStorage.setItem(
+          "AllFilms",
+          JSON.stringify(moviesResult.reverse())
+        );
+        localStorage.setItem(
+          "ShortFilms",
+          JSON.stringify(moviesResult.filter((item) => item.duration <= 40))
+        );
+        props.setLoggedIn(true);
+        navigate("/movies");
+      })
+      .catch((err) => {
+        console.log(`Вы неавторизованы ${err}`);
+      });
+  };
+
+  useEffect(() => {
+    login();
+    if (JSON.parse(localStorage.getItem("FavoriteMovie")) !== null) {
+      props.setSavedMovies(JSON.parse(localStorage.getItem("FavoriteMovie")));
+    }
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     api
       .login(userValue.password, userValue.email)
       .then((data) => {
         if (data) {
-          Promise.all([api.getProfile(), apiMovie.getMovies(), api.getMovies()])
-            .then(([infoResult, moviesResult, savedMoviesResult]) => {
-              props.setСurrentUser({
-                name: infoResult.name,
-                email: infoResult.email,
-                id: infoResult._id,
-              });
-              props.setLoggedIn(true);
-              navigate("/movies");
-              props.setMovies(moviesResult.reverse());
-              props.setSavedMovies(savedMoviesResult.reverse());
-            })
-            .catch((err) => {
-              console.log(`Вы неавторизованы ${err}`);
-            });
+          props.setShortFilms(false);
+          localStorage.setItem("isShort", false);
+          login();
         }
       })
       .catch((err) => {
+        setLoading(false);
         setError({ password: "Что-то пошло не так..." });
       });
   };
 
   return (
     <section className="registration">
+      <section className={isLoading ? "preloader" : "preloader_hiden"}>
+        <div className="preloader__loader">
+          <div className={isLoading ? "preloader__box" : "preloader_hiden"}>
+            <div
+              className={isLoading ? "preloader__spinner" : "preloader_hiden"}
+            >
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </section>
       <header className="registration__header">
         <Link to="/" className="registration__logo">
           <img src={logo} alt="логотип" />

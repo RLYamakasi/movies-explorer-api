@@ -1,10 +1,11 @@
-.account{
-    width: 40%;
-    margin: 0 auto;
+.account {
+  width: 40%;
+  margin: 0 auto;
+  position: relative;
 }
 
-@media screen and (max-width:767px){
-    .account {
-        width: 80%;
-    }
+@media screen and (max-width: 767px) {
+  .account {
+    width: 80%;
+  }
 }

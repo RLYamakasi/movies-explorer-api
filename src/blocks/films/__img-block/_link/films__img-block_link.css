@@ -1,0 +1,6 @@
+.films__img-block_link {
+  display: absolute;
+  grid-area: img;
+  width: 100%;
+  height: 203px;
+}

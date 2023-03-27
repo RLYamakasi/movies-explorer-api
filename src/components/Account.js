@@ -1,13 +1,49 @@
 import logo from "../images/logo.svg";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { api } from "../utils/MainApi";
-import { React, useContext, useState } from "react";
+import { React, useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ico_main from "../images/ico-main.svg";
 import ico_exit from "../images/exit-ico.svg";
+import ico_popUp from "../images/check.png";
 const Account = (props) => {
   const userContext = useContext(CurrentUserContext);
   const [isSideBarOpen, setSideBarOpen] = useState(false);
+  const [popUpOpen, setPopUpOpen] = useState(false);
+  const [isButtonActive, setButtonActive] = useState(false);
+  const [userValue, setUserValue] = useState({
+    email: userContext.email,
+    name: userContext.name,
+  });
+  const [errors, setErrors] = useState({
+    email: "",
+    name: "",
+  });
+  const [isValid, setIsValid] = useState({
+    email: true,
+    name: true,
+  });
+  useEffect(() => {
+    if (
+      (userContext.name !== userValue.name ||
+        userContext.email !== userValue.email) &&
+      isValid.name &&
+      isValid.email
+    ) {
+      setButtonActive(true);
+    } else {
+      setButtonActive(false);
+    }
+  }, [userValue]);
+
+  const handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    setUserValue({ ...userValue, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid({ ...isValid, [name]: target.closest("form").checkValidity() });
+  };
 
   const OpenSideBar = () => {
     setSideBarOpen(true);
@@ -17,11 +53,17 @@ const Account = (props) => {
   };
   const editProfile = (name, email) => {
     api.patchProfile(name, email).then(() => {
+      setPopUpOpen(true);
+      setTimeout(() => {
+        setPopUpOpen(false);
+      }, 3000);
+      console.log(popUpOpen);
       props.setСurrentUser({
         ...userContext,
         name,
         email,
       });
+      setButtonActive(false);
     });
   };
   const navigate = useNavigate();
@@ -31,6 +73,9 @@ const Account = (props) => {
       .then((data) => {
         if (data) {
           navigate("/");
+          localStorage.removeItem("SearchFilm");
+          localStorage.removeItem("isShort");
+          localStorage.removeItem("FavoriteMovie");
           props.setLoggedIn(false);
         }
       })
@@ -39,21 +84,14 @@ const Account = (props) => {
       });
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserValue({
-      ...userValue,
-      [name]: value,
-    });
-  };
-
-  const [userValue, setUserValue] = useState({
-    email: userContext.email,
-    name: userContext.name,
-  });
-
   return (
     <section>
+      <div className={popUpOpen ? "pop-up" : "pop-up_hiden"}>
+        <div className="pop-up__block">
+          <img className="pop-up__img" src={ico_popUp} />
+          <p>Успешно</p>
+        </div>
+      </div>
       <header>
         <nav className="navbar">
           <Link to="/" className="navbar__avatar">
@@ -106,17 +144,9 @@ const Account = (props) => {
       </header>
       <main>
         <section className="account">
-          {/* <form className="account__label">
-            <input
-              type="url"
-              className="account__input"
-              id="url"
-              placeholder="Фильм"
-              required
-            />
-          </form> */}
-          <h1 className="account__title">Привет, {userContext.name}!</h1>
           <div className="account__block">
+            <h1 className="account__title">Привет, {userContext.name}!</h1>
+            <p className="account__block-error">{errors.name}</p>
             <div className="account__block-name">
               <p className="account__block-name_text">Имя</p>
               <form className="account__label">
@@ -132,6 +162,7 @@ const Account = (props) => {
                 />
               </form>
             </div>
+            <p className="account__block-error">{errors.email}</p>
             <div className="account__block-email">
               <p className="account__block-email_text">E-mail</p>
               <form className="account__label">
@@ -149,7 +180,9 @@ const Account = (props) => {
             </div>
           </div>
           <p
-            className="account__content"
+            className={
+              isButtonActive ? "account__content" : "account__content_unactive"
+            }
             onClick={() => editProfile(userValue.name, userValue.email)}
           >
             Редактировать

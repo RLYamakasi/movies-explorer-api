@@ -9,7 +9,6 @@
 
 @media screen and (max-width: 1024px) {
   .navbar__side-ico {
-    display: none;
     height: 40px;
     width: 40px;
     opacity: 1;
