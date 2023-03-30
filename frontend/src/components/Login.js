@@ -49,7 +49,9 @@ const Login = (props) => {
         );
         props.setLoggedIn(true);
         navigate("/movies");
+        props.setSavedMovies(JSON.parse(localStorage.getItem("AllFilms")));
       })
+
       .catch((err) => {
         console.log(`Вы неавторизованы ${err}`);
       });

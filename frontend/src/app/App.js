@@ -87,18 +87,14 @@ function App() {
   const SearchFilter = () => {
     if (JSON.parse(localStorage.getItem("SearchFilm")) === null) {
       if (isShortFilms) {
-        console.log(1);
         setMovies(JSON.parse(localStorage.getItem("AllFilms")));
       } else {
-        console.log(2);
         setMovies(JSON.parse(localStorage.getItem("ShortFilms")));
       }
     } else {
       if (isShortFilms) {
-        console.log(3);
         setMovies([JSON.parse(localStorage.getItem("SearchFilm"))]);
       } else {
-        console.log(4);
         setMovies(
           [JSON.parse(localStorage.getItem("SearchFilm"))].filter(
             (item) => item.duration <= 40
