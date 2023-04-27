@@ -7,7 +7,10 @@ const FavoriteButton = ({
   MoviesRemoveFavorite,
 }) => {
   const [isliked, setLike] = useState(false);
-  if (isliked || savedMovies.some((i) => i.id === obj.id)) {
+  if (
+    savedMovies !== null &&
+    (isliked || savedMovies.some((i) => i.id === obj.id))
+  ) {
     return (
       <button
         className={`films__ico-block_active`}

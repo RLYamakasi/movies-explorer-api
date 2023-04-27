@@ -127,6 +127,7 @@ function App() {
                 setShortFilms={setShortFilms}
                 SearchFilter={SearchFilter}
                 setСurrentUser={setСurrentUser}
+                movies={movies}
                 setMovies={setMovies}
                 setLoggedIn={setLoggedIn}
                 savedMovies={savedMovies}

@@ -84,8 +84,10 @@ const Films = (props) => {
   };
 
   const MoviesToFavorite = (obj, setLike) => {
+    console.log(obj);
     if (
       localStorage.getItem("FavoriteMovie") !== null &&
+      props.savedMovies !== null &&
       !props.savedMovies.some((movies) => movies.id === obj.id)
     ) {
       let str = JSON.parse(localStorage.getItem("FavoriteMovie"));
