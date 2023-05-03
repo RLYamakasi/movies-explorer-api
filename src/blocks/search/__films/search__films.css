@@ -1,0 +1,19 @@
+.search__films{
+    background: #F9F9F9;
+    border-radius: 9px;
+    width: 70%;
+    height: 72px;
+    border: none;
+}
+
+.search__films:focus{
+    border: none;
+    outline: 3px solid #E8E8E8;
+}
+
+@media screen and (max-width:767px){
+    .search__films{
+        padding-left: 20px;
+    }
+}
+

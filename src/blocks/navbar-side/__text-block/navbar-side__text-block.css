@@ -1,0 +1,6 @@
+.navbar-side__text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 160px;
+}

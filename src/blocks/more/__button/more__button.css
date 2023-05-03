@@ -1,0 +1,13 @@
+.more__button{
+    background: white;
+    border: 1px solid #E8E8E8;
+    width: 320px;
+    height: 36px;
+    margin: 80px auto 0;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.more__button:hover{
+    border: 1px solid black;
+}

@@ -1,0 +1,4 @@
+.account__block-email{
+    display: flex;
+    justify-content: space-between;
+}

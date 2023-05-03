@@ -1,0 +1,22 @@
+.student__git-link {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 99px 0 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .student__git-link {
+    font-size: 14px;
+    line-height: 17px;
+    margin: 87px 0 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .student__git-link {
+    font-size: 14px;
+    line-height: 17px;
+    margin: 40px 0 0;
+  }
+}

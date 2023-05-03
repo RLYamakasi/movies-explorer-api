@@ -1,0 +1,4 @@
+.navbar__avatar {
+  grid-area: logo;
+  margin: auto 0;
+}

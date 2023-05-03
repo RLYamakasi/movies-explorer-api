@@ -1,0 +1,5 @@
+.more__button_vanished {
+  display: none;
+  width: 0;
+  height: 0;
+}

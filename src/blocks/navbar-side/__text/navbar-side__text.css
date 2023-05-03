@@ -1,0 +1,13 @@
+.navbar-side__text {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #000000;
+  text-decoration: none;
+}
+
+.navbar-side__text:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}

@@ -1,0 +1,25 @@
+.info__title {
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  padding-top: 20vh;
+  letter-spacing: -0.04em;
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .info__title {
+    width: 80%;
+    font-size: 40px;
+    line-height: 52px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .info__title {
+    font-size: 29px;
+    line-height: 37px;
+  }
+}

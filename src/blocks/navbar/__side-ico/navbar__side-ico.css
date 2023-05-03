@@ -1,0 +1,16 @@
+.navbar__side-ico {
+  opacity: 0;
+  margin: auto;
+  grid-area: d-side;
+  height: 0;
+  width: 0;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+  .navbar__side-ico {
+    height: 40px;
+    width: 40px;
+    opacity: 1;
+  }
+}

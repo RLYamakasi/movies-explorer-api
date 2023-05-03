@@ -1,0 +1,11 @@
+.films__text-block {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  grid-area: title;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  margin: 14px 0 0 14px;
+  max-width: 220px;
+}

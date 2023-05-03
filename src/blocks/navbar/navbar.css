@@ -1,0 +1,9 @@
+.navbar {
+  display: grid;
+  width: 85%;
+  margin: 0 auto;
+  grid-template-areas: "logo a-side b-side . c-side d-side";
+  grid-template-columns: 0.4fr 1fr 3fr 8fr 1fr 1fr;
+  height: 74px;
+  gap: 14px;
+}

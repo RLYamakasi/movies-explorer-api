@@ -1,0 +1,19 @@
+.navbar-side {
+  position: fixed;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 5;
+  transition: opacity 0.2s;
+}
+
+@media screen and (max-width: 1024px) {
+  .navbar-side {
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+  }
+}

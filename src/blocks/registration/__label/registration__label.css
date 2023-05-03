@@ -1,0 +1,11 @@
+.registration__label{
+    border: none;
+    background: none;
+}
+
+@media screen and (max-width:768px){
+    .registration__label {
+        width: 80%;
+        margin: 0 auto;
+    }
+}

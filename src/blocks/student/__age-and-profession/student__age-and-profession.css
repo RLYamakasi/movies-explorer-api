@@ -1,0 +1,21 @@
+.student__age-and-profession {
+  grid-area: age-prof;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0 0 26px;
+}
+
+@media screen and (max-width: 1024px) {
+  .student__age-and-profession {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .student__age-and-profession {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
