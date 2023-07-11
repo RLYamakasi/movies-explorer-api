@@ -1,24 +1,24 @@
 import logo from "../images/logo.svg";
 import search from "../images/search.svg";
 import find from "../images/find.svg";
-import closeicon from "../images/closeIcon.svg";
-import { Link } from "react-router-dom";
 import ico_main from "../images/ico-main.svg";
 import ico_exit from "../images/exit-ico.svg";
-import { React, useState } from "react";
+import { Link } from "react-router-dom";
+import { React, useEffect, useState, useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import FavoriteButton from "../components/FavoriteButton";
 
-const SavedFilms = (props) => {
-  const [isSideBarOpen, setSideBarOpen] = useState(false);
+const Films = (props) => {
+  const userContext = useContext(CurrentUserContext);
   const [searchContent, setSearchContent] = useState({
     movie: "",
   });
   const [isLoading, setLoading] = useState(false);
-  const OpenSideBar = () => {
-    setSideBarOpen(true);
-  };
-  const CloseSideBar = () => {
-    setSideBarOpen(false);
-  };
+  const [isSideBarOpen, setSideBarOpen] = useState(false);
+
+  const [moviesCount, setmoviesCount] = useState([]);
+  const [moreCount, setmoreCount] = useState(0);
+  const [moreButtonClass, setmoreButtonClass] = useState("more__button");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,32 +27,32 @@ const SavedFilms = (props) => {
     });
   };
 
-  const shortFilms = () => {
-    if (props.isShortFilms === true) {
-      props.setShortFilms(false);
-      localStorage.setItem("isShort", props.isShortFilms);
-      props.SearchSavedFilter();
-    } else {
-      props.setShortFilms(true);
-      localStorage.setItem("isShort", props.isShortFilms);
-      props.SearchSavedFilter();
-    }
+  const setmoreCountFunc = () => {
+    setmoreCount(moreCount + 1);
+  };
+  const OpenSideBar = () => {
+    setSideBarOpen(true);
+  };
+  const CloseSideBar = () => {
+    setSideBarOpen(false);
   };
 
   const searchFilms = (e) => {
     e.preventDefault();
+    localStorage.setItem("SearchInput", JSON.stringify(searchContent));
     setLoading(true);
     setTimeout(() => {
       JSON.parse(localStorage.getItem("AllFilms")).map((obj) => {
         obj.nameRU.split(" ").some((movie) => {
           if (searchContent.movie.length === 0) {
             localStorage.removeItem("SearchFilm");
-            props.SearchSavedFilter();
+            props.SearchFilter();
           } else if (
             movie.toLowerCase() === searchContent.movie.toLowerCase()
           ) {
             localStorage.setItem("SearchFilm", JSON.stringify(obj));
-            props.SearchSavedFilter();
+
+            props.SearchFilter();
           }
         });
       });
@@ -60,13 +60,72 @@ const SavedFilms = (props) => {
     }, 600);
   };
 
-  const DeleteMovies = (id) => {
-    console.log(
-      props.setSavedMovies(props.savedMovies.filter((movie) => movie.id !== id))
-    );
+  // const shortFilms = () => {
+  //   console.log("gdgdgdg");
+  //   if (props.isShortFilms === true) {
+  //     props.setShortFilms(false);
+  //     localStorage.setItem("isShort", props.isShortFilms);
+  //     props.SearchFilter();
+  //   } else {
+  //     props.setShortFilms(true);
+  //     localStorage.setItem("isShort", props.isShortFilms);
+  //     props.SearchFilter();
+  //     setmoreButtonClass("more__button");
+  //   }
+  // };localStorage.getItem("SearchFilm")
 
-    localStorage.setItem("FavoriteMovie", JSON.stringify(props.savedMovies));
+  const MoviesRemoveFavorite = (obj, setLike) => {
+    setLoading(true);
+    let deletedMovie = props.savedMovies.filter((movie) => movie.id !== obj.id);
+    props.setSavedMovies(deletedMovie);
+    localStorage.setItem("FavoriteMovie", JSON.stringify(deletedMovie));
+    setLike(false);
+    setLoading(false);
   };
+
+  const MoviesToFavorite = (obj, setLike) => {
+    console.log(obj);
+    if (
+      localStorage.getItem("FavoriteMovie") !== null &&
+      props.savedMovies !== null &&
+      !props.savedMovies.some((movies) => movies.id === obj.id)
+    ) {
+      let str = JSON.parse(localStorage.getItem("FavoriteMovie"));
+      str.push(obj);
+      console.log(str);
+      localStorage.setItem("FavoriteMovie", JSON.stringify(str));
+      props.setSavedMovies(JSON.parse(localStorage.getItem("FavoriteMovie")));
+      setLike(true);
+    } else if (localStorage.getItem("FavoriteMovie") === null) {
+      localStorage.setItem("FavoriteMovie", JSON.stringify([obj]));
+      props.setSavedMovies(JSON.parse(localStorage.getItem("FavoriteMovie")));
+      setLike(true);
+    }
+
+    setLoading(false);
+  };
+
+  const GetMovie = (movies) => {
+    if (window.screen.availWidth >= 1280) {
+      setmoviesCount(movies.slice(0, 12 + moreCount * 3));
+    } else if (
+      window.screen.availWidth < 1280 &&
+      window.screen.availWidth >= 768
+    ) {
+      setmoviesCount(movies.slice(0, 8 + moreCount * 2));
+    } else {
+      setmoviesCount(movies.slice(0, 5 + moreCount * 2));
+    }
+  };
+
+  useEffect(() => {
+    setSearchContent(JSON.parse(localStorage.getItem("SearchInput")));
+    GetMovie(props.movies);
+    setmoreButtonClass("more__button");
+    if (props.movies.length <= 12 + moreCount * 3) {
+      setmoreButtonClass("more__button_vanished");
+    }
+  }, [moreCount, props.movies, props.savedMovies, props.isShortFilms]);
 
   return (
     <section>
@@ -121,6 +180,17 @@ const SavedFilms = (props) => {
         </nav>
       </header>
       <main>
+        <section className={isLoading ? "preloader" : "preloader_hiden"}>
+          <div className="preloader__loader">
+            <div className={isLoading ? "preloader__box" : "preloader_hiden"}>
+              <div
+                className={isLoading ? "preloader__spinner" : "preloader_hiden"}
+              >
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </section>
         <section className="search">
           <form className="search__label">
             <img src={search} className="search__icon" alt="иконка поиска" />
@@ -147,7 +217,10 @@ const SavedFilms = (props) => {
             </button>
             <label className="search__checkbox">
               <input
-                onChange={() => shortFilms()}
+                checked={props.isShortFilms}
+                onChange={() => {
+                  props.shortFilms();
+                }}
                 className="search__checkbox_input"
                 type="checkbox"
                 id="checkbox"
@@ -158,7 +231,7 @@ const SavedFilms = (props) => {
           </form>
         </section>
         <section className="films">
-          {props.savedMovies.map((obj, i) => (
+          {moviesCount.map((obj, i) => (
             <div key={obj.id} className="films__block">
               <p className="films__text-block">{obj.nameRU}</p>
               <p className="films__time-block">
@@ -169,23 +242,33 @@ const SavedFilms = (props) => {
                     " минут"
                   : (obj.duration % 60) + " минут"}
               </p>
-              <button
-                className="films__ico-block"
-                onClick={() => DeleteMovies(obj.id)}
+              <FavoriteButton
+                MoviesRemoveFavorite={MoviesRemoveFavorite}
+                savedMovies={props.savedMovies}
+                obj={obj}
+                MoviesToFavorite={MoviesToFavorite}
+              />
+              <a
+                href={obj.trailerLink}
+                target="_blank"
+                className="films__img-block_link"
               >
                 <img
-                  className="films__ico-block_img"
-                  src={closeicon}
-                  alt="иконка-удалить"
+                  className="films__img-block"
+                  src={"https://api.nomoreparties.co/" + obj.image.url}
+                  alt="изображение фильма"
                 />
-              </button>
-              <img
-                className="films__img-block"
-                src={"https://api.nomoreparties.co/" + obj.image.url}
-                alt="изображение фильма"
-              />
+              </a>
             </div>
           ))}
+        </section>
+        <section className="more">
+          <button
+            className={moreButtonClass}
+            onClick={() => setmoreCountFunc()}
+          >
+            Ещё
+          </button>
         </section>
       </main>
       <footer className="footer">
@@ -207,4 +290,4 @@ const SavedFilms = (props) => {
   );
 };
 
-export default SavedFilms;
+export default Films;

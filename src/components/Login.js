@@ -43,15 +43,12 @@ const Login = (props) => {
           "AllFilms",
           JSON.stringify(moviesResult.reverse())
         );
-        // props.setMovies(moviesResult);
-        console.log(props.movies, moviesResult);
         localStorage.setItem(
           "ShortFilms",
           JSON.stringify(moviesResult.filter((item) => item.duration <= 40))
         );
         props.setLoggedIn(true);
         navigate("/movies");
-        props.setSavedMovies(JSON.parse(localStorage.getItem("AllFilms")));
       })
 
       .catch((err) => {
@@ -61,6 +58,14 @@ const Login = (props) => {
 
   useEffect(() => {
     login();
+    // props.setShortFilms(localStorage.getItem("isShort") === "true");
+    // console.log(localStorage.getItem("isShort") === "true");
+    if (JSON.parse(localStorage.getItem("isShort")) === null) {
+      localStorage.setItem("isShort", false);
+    }
+    // if (JSON.parse(localStorage.getItem("isShortSaved")) === null) {
+    //   localStorage.setItem("isShortSaved", false);
+    // }
     if (JSON.parse(localStorage.getItem("FavoriteMovie")) !== null) {
       props.setSavedMovies(JSON.parse(localStorage.getItem("FavoriteMovie")));
     }
