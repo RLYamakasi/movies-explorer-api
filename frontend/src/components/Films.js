@@ -39,7 +39,6 @@ const Films = (props) => {
 
   const searchFilms = (e) => {
     e.preventDefault();
-    console.log(localStorage.getItem("isShort") === "true");
     setLoading(true);
     setTimeout(() => {
       JSON.parse(localStorage.getItem("AllFilms")).map((obj) => {
@@ -85,8 +84,10 @@ const Films = (props) => {
   };
 
   const MoviesToFavorite = (obj, setLike) => {
+    console.log(obj);
     if (
       localStorage.getItem("FavoriteMovie") !== null &&
+      props.savedMovies !== null &&
       !props.savedMovies.some((movies) => movies.id === obj.id)
     ) {
       let str = JSON.parse(localStorage.getItem("FavoriteMovie"));
@@ -105,6 +106,7 @@ const Films = (props) => {
   };
 
   const GetMovie = (movies) => {
+    console.log(movies);
     if (window.screen.availWidth >= 1280) {
       setmoviesCount(movies.slice(0, 12 + moreCount * 3));
     } else if (

@@ -43,13 +43,17 @@ const Login = (props) => {
           "AllFilms",
           JSON.stringify(moviesResult.reverse())
         );
+        // props.setMovies(moviesResult);
+        console.log(props.movies, moviesResult);
         localStorage.setItem(
           "ShortFilms",
           JSON.stringify(moviesResult.filter((item) => item.duration <= 40))
         );
         props.setLoggedIn(true);
         navigate("/movies");
+        props.setSavedMovies(JSON.parse(localStorage.getItem("AllFilms")));
       })
+
       .catch((err) => {
         console.log(`Вы неавторизованы ${err}`);
       });
