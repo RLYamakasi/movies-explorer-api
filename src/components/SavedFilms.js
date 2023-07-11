@@ -5,7 +5,7 @@ import closeicon from "../images/closeIcon.svg";
 import { Link } from "react-router-dom";
 import ico_main from "../images/ico-main.svg";
 import ico_exit from "../images/exit-ico.svg";
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 
 const SavedFilms = (props) => {
   const [isSideBarOpen, setSideBarOpen] = useState(false);
@@ -26,15 +26,30 @@ const SavedFilms = (props) => {
       [name]: value,
     });
   };
+  useEffect(() => {
+    if (window.screen.availWidth <= 1024) {
+      isSideBarOpen(true);
+    }
+    // props.setShortSavedFilms(localStorage.getItem("isShortSaved") === "true");
+    // if (localStorage.getItem("isShortSaved") === "true") {
+    //   shortFilms();
+    //   console.log(1);
+    // } else {
+    //   localStorage.setItem("isShortSaved", true);
+    //   console.log(2);
+    //   props.SearchSavedFilter();
+    // }
+    console.log(localStorage.getItem("isShortSaved") === "true");
+  }, []);
 
   const shortFilms = () => {
-    if (props.isShortFilms === true) {
-      props.setShortFilms(false);
-      localStorage.setItem("isShort", props.isShortFilms);
+    if (props.isShortSavedFilms === false) {
+      props.setShortSavedFilms(true);
+      localStorage.setItem("isShortSaved", props.isShortSavedFilms);
       props.SearchSavedFilter();
     } else {
-      props.setShortFilms(true);
-      localStorage.setItem("isShort", props.isShortFilms);
+      props.setShortSavedFilms(false);
+      localStorage.setItem("isShortSaved", props.isShortSavedFilms);
       props.SearchSavedFilter();
     }
   };
@@ -60,12 +75,15 @@ const SavedFilms = (props) => {
     }, 600);
   };
 
-  const DeleteMovies = (id) => {
-    console.log(
-      props.setSavedMovies(props.savedMovies.filter((movie) => movie.id !== id))
-    );
-
-    localStorage.setItem("FavoriteMovie", JSON.stringify(props.savedMovies));
+  const DeleteMovies = (obj) => {
+    // props.setSavedMovies(
+    //   props.savedMovies.filter((movie) => movie.id !== obj.id)
+    // );
+    // console.log(props.savedMovies);
+    // localStorage.removeItem("FavoriteMovie", obj.id);
+    let deletedMovie = props.savedMovies.filter((movie) => movie.id !== obj.id);
+    props.setSavedMovies(deletedMovie);
+    localStorage.setItem("FavoriteMovie", JSON.stringify(deletedMovie));
   };
 
   return (
@@ -171,7 +189,7 @@ const SavedFilms = (props) => {
               </p>
               <button
                 className="films__ico-block"
-                onClick={() => DeleteMovies(obj.id)}
+                onClick={() => DeleteMovies(obj)}
               >
                 <img
                   className="films__ico-block_img"

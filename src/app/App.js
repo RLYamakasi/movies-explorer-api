@@ -20,6 +20,9 @@ function App() {
   const [isShortFilms, setShortFilms] = useState(
     localStorage.getItem("isShort") === "true"
   );
+  const [isShortSavedFilms, setShortSavedFilms] = useState(
+    localStorage.getItem("isShortSaved") === "true"
+  );
   // const [isShortSavedFilms, ShortSavedFilms] = useState(
   //   localStorage.getItem("isShortFavorite") === "true"
   // );
@@ -46,38 +49,34 @@ function App() {
       setShortFilms(true);
       localStorage.setItem("isShort", isShortFilms);
       SearchFilter();
-      // moreButton("more__button");
     }
   };
 
   const SearchSavedFilter = () => {
     if (JSON.parse(localStorage.getItem("SearchFilm")) === null) {
-      if (isShortFilms) {
-        console.log(1);
+      if (isShortSavedFilms) {
+        setSavedMovies(JSON.parse(localStorage.getItem("FavoriteMovie")));
+      } else {
         setSavedMovies(
           JSON.parse(localStorage.getItem("FavoriteMovie")).filter(
             (item) => item.duration <= 40
           )
         );
-      } else {
-        console.log(2);
-        setSavedMovies(JSON.parse(localStorage.getItem("FavoriteMovie")));
       }
     } else {
-      if (isShortFilms) {
+      if (isShortSavedFilms) {
+        setSavedMovies(
+          JSON.parse(localStorage.getItem("FavoriteMovie")).filter(
+            (item) =>
+              item.id === JSON.parse(localStorage.getItem("SearchFilm")).id
+          )
+        );
+      } else {
         setSavedMovies(
           JSON.parse(localStorage.getItem("FavoriteMovie")).filter(
             (item) =>
               item === [JSON.parse(localStorage.getItem("SearchFilm"))] &&
               item.duration <= 40
-          )
-        );
-      } else {
-        console.log(JSON.parse(localStorage.getItem("SearchFilm")).id);
-        setSavedMovies(
-          JSON.parse(localStorage.getItem("FavoriteMovie")).filter(
-            (item) =>
-              item.id === JSON.parse(localStorage.getItem("SearchFilm")).id
           )
         );
       }
@@ -163,8 +162,8 @@ function App() {
               <ProtectedRoute
                 element={
                   <SavedFilms
-                    isShortFilms={isShortFilms}
-                    setShortFilms={setShortFilms}
+                    setShortSavedFilms={setShortSavedFilms}
+                    isShortSavedFilms={isShortSavedFilms}
                     SearchSavedFilter={SearchSavedFilter}
                     setSavedMovies={setSavedMovies}
                     savedMovies={savedMovies}

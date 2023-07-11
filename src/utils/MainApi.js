@@ -110,7 +110,7 @@ export default class MainApi {
 }
 
 export const api = new MainApi({
-  baseUrl: "https://moviesbackend.nomoredomains.work",
+  baseUrl: "http://localhost:3001",
   headers: {
     "Content-Type": "application/json",
   },

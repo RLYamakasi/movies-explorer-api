@@ -39,6 +39,7 @@ const Films = (props) => {
 
   const searchFilms = (e) => {
     e.preventDefault();
+    localStorage.setItem("SearchInput", JSON.stringify(searchContent));
     setLoading(true);
     setTimeout(() => {
       JSON.parse(localStorage.getItem("AllFilms")).map((obj) => {
@@ -50,6 +51,7 @@ const Films = (props) => {
             movie.toLowerCase() === searchContent.movie.toLowerCase()
           ) {
             localStorage.setItem("SearchFilm", JSON.stringify(obj));
+
             props.SearchFilter();
           }
         });
@@ -70,15 +72,13 @@ const Films = (props) => {
   //     props.SearchFilter();
   //     setmoreButtonClass("more__button");
   //   }
-  // };
+  // };localStorage.getItem("SearchFilm")
 
   const MoviesRemoveFavorite = (obj, setLike) => {
     setLoading(true);
-    props.setSavedMovies(
-      props.savedMovies.filter((movie) => movie.nameRU !== obj.nameRU)
-    );
-    console.log(props.savedMovies);
-    localStorage.setItem("FavoriteMovie", JSON.stringify(props.savedMovies));
+    let deletedMovie = props.savedMovies.filter((movie) => movie.id !== obj.id);
+    props.setSavedMovies(deletedMovie);
+    localStorage.setItem("FavoriteMovie", JSON.stringify(deletedMovie));
     setLike(false);
     setLoading(false);
   };
@@ -106,7 +106,6 @@ const Films = (props) => {
   };
 
   const GetMovie = (movies) => {
-    console.log(movies);
     if (window.screen.availWidth >= 1280) {
       setmoviesCount(movies.slice(0, 12 + moreCount * 3));
     } else if (
@@ -120,6 +119,7 @@ const Films = (props) => {
   };
 
   useEffect(() => {
+    setSearchContent(JSON.parse(localStorage.getItem("SearchInput")));
     GetMovie(props.movies);
     setmoreButtonClass("more__button");
     if (props.movies.length <= 12 + moreCount * 3) {
@@ -138,7 +138,7 @@ const Films = (props) => {
             Фильмы
           </Link>
           <Link to="/saved-movies" className="navbar__saved-films">
-            Сохранённые
+            Сохранённые фильмы
           </Link>
           <Link to="/profile" className="navbar__account">
             Аккаунт
@@ -218,7 +218,9 @@ const Films = (props) => {
             <label className="search__checkbox">
               <input
                 checked={props.isShortFilms}
-                onChange={() => props.shortFilms()}
+                onChange={() => {
+                  props.shortFilms();
+                }}
                 className="search__checkbox_input"
                 type="checkbox"
                 id="checkbox"
