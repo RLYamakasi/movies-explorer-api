@@ -92,8 +92,8 @@ module.exports.login = (req, res, next) => {
         );
         res.cookie("token", token, {
           secure: true,
-          sameSite: "none",
           httpOnly: true,
+          sameSite: "none",
         });
         return res.send({ token });
       });

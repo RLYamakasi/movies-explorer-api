@@ -3,8 +3,8 @@ const allowedCors = [
   "http://localhost:3000",
   "http://localhost:3001",
   "https://api.nomoreparties.co/beatfilm-movies",
-  "https://moviesbackend.nomoredomains.xyz",
-  "http://moviesbackend.nomoredomains.xyz",
+  "https://moviesBackend.nomoredomains.xyz",
+  "http://moviesBackend.nomoredomains.xyz",
   "http://moviesfrontend.nomoredomains.work",
 ];
 
