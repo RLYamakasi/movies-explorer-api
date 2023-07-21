@@ -60,20 +60,6 @@ const Films = (props) => {
     }, 600);
   };
 
-  // const shortFilms = () => {
-  //   console.log("gdgdgdg");
-  //   if (props.isShortFilms === true) {
-  //     props.setShortFilms(false);
-  //     localStorage.setItem("isShort", props.isShortFilms);
-  //     props.SearchFilter();
-  //   } else {
-  //     props.setShortFilms(true);
-  //     localStorage.setItem("isShort", props.isShortFilms);
-  //     props.SearchFilter();
-  //     setmoreButtonClass("more__button");
-  //   }
-  // };localStorage.getItem("SearchFilm")
-
   const MoviesRemoveFavorite = (obj, setLike) => {
     setLoading(true);
     let deletedMovie = props.savedMovies.filter((movie) => movie.id !== obj.id);
@@ -198,7 +184,6 @@ const Films = (props) => {
               name="movie"
               onChange={handleChange}
               type="search"
-              value={searchContent.movie}
               className="search__films"
               placeholder="Фильм"
               required

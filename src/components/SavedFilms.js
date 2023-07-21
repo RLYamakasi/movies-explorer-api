@@ -30,25 +30,20 @@ const SavedFilms = (props) => {
     if (window.screen.availWidth <= 1024) {
       isSideBarOpen(true);
     }
-    // props.setShortSavedFilms(localStorage.getItem("isShortSaved") === "true");
-    // if (localStorage.getItem("isShortSaved") === "true") {
-    //   shortFilms();
-    //   console.log(1);
-    // } else {
-    //   localStorage.setItem("isShortSaved", true);
-    //   console.log(2);
-    //   props.SearchSavedFilter();
-    // }
     console.log(localStorage.getItem("isShortSaved") === "true");
   }, []);
 
   const shortFilms = () => {
-    if (props.isShortSavedFilms === false) {
+    if (props.savedMovies.length === 0) {
+      props.setShortSavedFilms(!props.savedMovies);
+      localStorage.setItem("isShortSaved", props.isShortSavedFilms);
+    } else if (props.isShortSavedFilms === false) {
       props.setShortSavedFilms(true);
       localStorage.setItem("isShortSaved", props.isShortSavedFilms);
       props.SearchSavedFilter();
     } else {
       props.setShortSavedFilms(false);
+
       localStorage.setItem("isShortSaved", props.isShortSavedFilms);
       props.SearchSavedFilter();
     }
@@ -76,11 +71,6 @@ const SavedFilms = (props) => {
   };
 
   const DeleteMovies = (obj) => {
-    // props.setSavedMovies(
-    //   props.savedMovies.filter((movie) => movie.id !== obj.id)
-    // );
-    // console.log(props.savedMovies);
-    // localStorage.removeItem("FavoriteMovie", obj.id);
     let deletedMovie = props.savedMovies.filter((movie) => movie.id !== obj.id);
     props.setSavedMovies(deletedMovie);
     localStorage.setItem("FavoriteMovie", JSON.stringify(deletedMovie));

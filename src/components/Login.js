@@ -58,14 +58,13 @@ const Login = (props) => {
 
   useEffect(() => {
     login();
-    // props.setShortFilms(localStorage.getItem("isShort") === "true");
-    // console.log(localStorage.getItem("isShort") === "true");
     if (JSON.parse(localStorage.getItem("isShort")) === null) {
       localStorage.setItem("isShort", false);
     }
-    // if (JSON.parse(localStorage.getItem("isShortSaved")) === null) {
-    //   localStorage.setItem("isShortSaved", false);
-    // }
+    if (JSON.parse(localStorage.getItem("isShort")) === null) {
+      localStorage.setItem("isShortSaved", false);
+    }
+
     if (JSON.parse(localStorage.getItem("FavoriteMovie")) !== null) {
       props.setSavedMovies(JSON.parse(localStorage.getItem("FavoriteMovie")));
     }
