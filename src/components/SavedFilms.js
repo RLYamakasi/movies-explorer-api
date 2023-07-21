@@ -34,7 +34,10 @@ const SavedFilms = (props) => {
   }, []);
 
   const shortFilms = () => {
-    if (props.savedMovies.length === 0) {
+    if (
+      props.savedMovies.length === 0 &&
+      localStorage.getItem("FavoriteMovie") === null
+    ) {
       props.setShortSavedFilms(!props.savedMovies);
       localStorage.setItem("isShortSaved", props.isShortSavedFilms);
     } else if (props.isShortSavedFilms === false) {
