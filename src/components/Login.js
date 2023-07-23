@@ -43,6 +43,7 @@ const Login = (props) => {
           "AllFilms",
           JSON.stringify(moviesResult.reverse())
         );
+        props.setMovies(JSON.parse(localStorage.getItem("AllFilms")));
         localStorage.setItem(
           "ShortFilms",
           JSON.stringify(moviesResult.filter((item) => item.duration <= 40))
