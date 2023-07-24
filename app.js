@@ -27,5 +27,5 @@ mongoose.connect(process.env.MONGO_ADRESS || adress, () => {
   app.use("/", errorHandler);
 });
 
-app.listen(3002);
+app.listen(3001);
 //test
