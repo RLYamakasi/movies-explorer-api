@@ -23,9 +23,6 @@ function App() {
   const [isShortSavedFilms, setShortSavedFilms] = useState(
     localStorage.getItem("isShortSaved") === "true"
   );
-  // const [isShortSavedFilms, ShortSavedFilms] = useState(
-  //   localStorage.getItem("isShortFavorite") === "true"
-  // );
 
   useEffect(() => {
     if (window.screen.availWidth <= 1024) {
@@ -147,7 +144,6 @@ function App() {
                     SearchFilter={SearchFilter}
                     setSavedMovies={setSavedMovies}
                     setMovies={setMovies}
-                    // movies2={movies}
                     movies={movies}
                     savedMovies={savedMovies}
                   />

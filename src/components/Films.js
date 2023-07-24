@@ -103,7 +103,9 @@ const Films = (props) => {
   };
 
   useEffect(() => {
-    setSearchContent(JSON.parse(localStorage.getItem("SearchInput")));
+    if (JSON.parse(localStorage.getItem("SearchInput")) !== null) {
+      setSearchContent(JSON.parse(localStorage.getItem("SearchInput")));
+    }
     GetMovie(props.movies);
     setmoreButtonClass("more__button");
     if (props.movies.length <= 12 + moreCount * 3) {
@@ -179,6 +181,7 @@ const Films = (props) => {
           <form className="search__label">
             <img src={search} className="search__icon" alt="иконка поиска" />
             <input
+              value={searchContent.movie}
               name="movie"
               onChange={handleChange}
               type="search"

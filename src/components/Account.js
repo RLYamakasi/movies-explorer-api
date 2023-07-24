@@ -73,11 +73,8 @@ const Account = (props) => {
       .then((data) => {
         if (data) {
           navigate("/");
-          localStorage.removeItem("SearchFilm");
-          localStorage.removeItem("isShort");
-          localStorage.removeItem("FavoriteMovie");
-          localStorage.removeItem("AllFilms");
-          localStorage.removeItem("ShortFilms");
+          localStorage.clear();
+          localStorage.setItem("FavoriteMovie", JSON.stringify([]));
           props.setLoggedIn(false);
         }
       })
