@@ -16,14 +16,7 @@ router.post("/signin", userValidateLogin, login);
 router.use("/", auth, routesMovie);
 router.use("/", auth, routesUser);
 router.post("/signout", auth, (req, res) => {
-  res
-    .clearCookie("token", {
-      secure: true,
-      httpOnly: true,
-      sameSite: "none",
-    })
-    .status(200)
-    .send({ message: messageSignOut });
+  res.clearCookie("token").status(200).send({ message: messageSignOut });
 });
 router.use(auth, (req, res, next) => {
   next(new NotFound(errorRoute));
