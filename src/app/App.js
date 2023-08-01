@@ -82,13 +82,13 @@ function App() {
 
   const SearchFilter = () => {
     if (JSON.parse(localStorage.getItem("SearchFilm")) === null) {
-      if (isShortFilms) {
+      if (JSON.parse(localStorage.getItem("isShort"))) {
         setMovies(JSON.parse(localStorage.getItem("AllFilms")));
       } else {
         setMovies(JSON.parse(localStorage.getItem("ShortFilms")));
       }
     } else {
-      if (isShortFilms) {
+      if (JSON.parse(localStorage.getItem("isShort"))) {
         setMovies([JSON.parse(localStorage.getItem("SearchFilm"))]);
       } else {
         setMovies(

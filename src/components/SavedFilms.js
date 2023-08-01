@@ -8,6 +8,7 @@ import ico_exit from "../images/exit-ico.svg";
 import { React, useState, useEffect } from "react";
 
 const SavedFilms = (props) => {
+  const [popUpOpen, setPopUpOpen] = useState(false);
   const [isSideBarOpen, setSideBarOpen] = useState(false);
   const [searchContent, setSearchContent] = useState({
     movie: "",
@@ -69,6 +70,18 @@ const SavedFilms = (props) => {
           }
         });
       });
+      if (
+        JSON.parse(localStorage.getItem("AllFilms")).every((el) => {
+          return el.nameRU.split(" ").every((letters) => {
+            return letters.toLowerCase() !== searchContent.movie.toLowerCase();
+          });
+        })
+      ) {
+        setPopUpOpen(true);
+        setTimeout(() => {
+          setPopUpOpen(false);
+        }, 2500);
+      }
       setLoading(false);
     }, 600);
   };
@@ -81,6 +94,12 @@ const SavedFilms = (props) => {
 
   return (
     <section>
+      <div className={popUpOpen ? "pop-up" : "pop-up_hiden"}>
+        <div className="pop-up__block">
+          <img className="pop-up__img" src={ico_exit} />
+          <p>Ничего не найдено</p>
+        </div>
+      </div>
       <header>
         <nav className="navbar">
           <Link to="/" className="navbar__avatar">

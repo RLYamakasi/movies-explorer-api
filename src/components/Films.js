@@ -14,8 +14,9 @@ const Films = (props) => {
     movie: "",
   });
   const [isLoading, setLoading] = useState(false);
+  const [isFind, setFind] = useState(false);
   const [isSideBarOpen, setSideBarOpen] = useState(false);
-
+  const [popUpOpen, setPopUpOpen] = useState(false);
   const [moviesCount, setmoviesCount] = useState([]);
   const [moreCount, setmoreCount] = useState(0);
   const [moreButtonClass, setmoreButtonClass] = useState("more__button");
@@ -51,11 +52,23 @@ const Films = (props) => {
             movie.toLowerCase() === searchContent.movie.toLowerCase()
           ) {
             localStorage.setItem("SearchFilm", JSON.stringify(obj));
-
             props.SearchFilter();
           }
         });
       });
+
+      if (
+        JSON.parse(localStorage.getItem("AllFilms")).every((el) => {
+          return el.nameRU.split(" ").every((letters) => {
+            return letters.toLowerCase() !== searchContent.movie.toLowerCase();
+          });
+        })
+      ) {
+        setPopUpOpen(true);
+        setTimeout(() => {
+          setPopUpOpen(false);
+        }, 2500);
+      }
       setLoading(false);
     }, 600);
   };
@@ -115,6 +128,12 @@ const Films = (props) => {
 
   return (
     <section>
+      <div className={popUpOpen ? "pop-up" : "pop-up_hiden"}>
+        <div className="pop-up__block">
+          <img className="pop-up__img" src={ico_exit} />
+          <p>Ничего не найдено</p>
+        </div>
+      </div>
       <header>
         <nav className="navbar">
           <Link to="/" className="navbar__avatar">
