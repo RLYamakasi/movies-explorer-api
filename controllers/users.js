@@ -92,7 +92,7 @@ module.exports.login = (req, res, next) => {
         );
         res.cookie("token", token, {
           maxAge: 3600 * 24 * 7,
-          // secure: true,
+          secure: true,
           httpOnly: true,
           sameSite: "none",
         });
