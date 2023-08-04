@@ -91,7 +91,7 @@ module.exports.login = (req, res, next) => {
           { expiresIn: "7d" }
         );
         res.cookie("token", token, {
-          maxAge: 3600 * 24 * 7,
+          expiresIn: "7d",
           secure: true,
           httpOnly: true,
           sameSite: "none",
