@@ -92,7 +92,7 @@ module.exports.login = (req, res, next) => {
         );
         res.cookie("token", token, {
           expiresIn: "7d",
-          secure: true,
+          // secure: true,
           httpOnly: true,
           sameSite: "none",
         });
