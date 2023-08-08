@@ -5,7 +5,6 @@ import { api } from "../utils/MainApi";
 import { apiMovie } from "../utils/MoviesApi";
 
 const Login = (props) => {
-  const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   const [isValid, setValid] = useState({
     email: "",
@@ -31,44 +30,19 @@ const Login = (props) => {
     });
   };
 
-  const login = () => {
-    Promise.all([api.getProfile(), apiMovie.getMovies()])
-      .then(([infoResult, moviesResult]) => {
-        props.setСurrentUser({
-          name: infoResult.name,
-          email: infoResult.email,
-          id: infoResult._id,
-        });
-        localStorage.setItem(
-          "AllFilms",
-          JSON.stringify(moviesResult.reverse())
-        );
-        props.setMovies(JSON.parse(localStorage.getItem("AllFilms")));
-        localStorage.setItem(
-          "ShortFilms",
-          JSON.stringify(moviesResult.filter((item) => item.duration <= 40))
-        );
-        props.setLoggedIn(true);
-        navigate("/movies");
-      })
-
-      .catch((err) => {
-        console.log(`Вы неавторизованы ${err}`);
-      });
-  };
-
   useEffect(() => {
-    login();
     if (JSON.parse(localStorage.getItem("isShort")) === null) {
       localStorage.setItem("isShort", false);
+      console.log(1);
     }
-    if (JSON.parse(localStorage.getItem("isShort")) === null) {
+    if (JSON.parse(localStorage.getItem("isShortSaved")) === null) {
       localStorage.setItem("isShortSaved", false);
+      console.log(2);
     }
-
     if (JSON.parse(localStorage.getItem("FavoriteMovie")) !== null) {
       props.setSavedMovies(JSON.parse(localStorage.getItem("FavoriteMovie")));
     }
+    props.login();
   }, []);
 
   const handleSubmit = (e) => {
@@ -78,9 +52,7 @@ const Login = (props) => {
       .login(userValue.password, userValue.email)
       .then((data) => {
         if (data) {
-          props.setShortFilms(false);
-          localStorage.setItem("isShort", false);
-          login();
+          props.login();
         }
       })
       .catch((err) => {

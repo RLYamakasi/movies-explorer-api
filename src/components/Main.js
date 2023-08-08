@@ -2,7 +2,7 @@ import logo from "../images/logo.svg";
 import link from "../images/link.svg";
 import me from "../images/me.jpg";
 import { Link } from "react-router-dom";
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 const Main = (props) => {
   const [isSideBarOpen, setSideBarOpen] = useState(false);
 
@@ -128,10 +128,10 @@ const Main = (props) => {
           <div className="student__about-me">
             <h5 className="student__name">Алексей</h5>
             <p className="student__age-and-profession">
-              будущий фронтенд-разработчик, 17 лет
+              будущий фронтенд-разработчик, 18 лет
             </p>
             <p className="student__main-info">
-              Я родился и живу в Волгограле, учусь в 11 классе. Я люблю слушать
+              Я родился и живу в Волгограле, закончил 11 класс. Я люблю слушать
               музыку, а ещё увлекаюсь бегом. Недавно начал кодить. После того,
               как прошёл курс по веб-разработке, решил, что хочу стать
               веб-разработчиком.

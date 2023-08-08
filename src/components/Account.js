@@ -24,6 +24,7 @@ const Account = (props) => {
     name: true,
   });
   useEffect(() => {
+    console.log(userContext);
     if (
       (userContext.name !== userValue.name ||
         userContext.email !== userValue.email) &&
@@ -52,19 +53,21 @@ const Account = (props) => {
     setSideBarOpen(false);
   };
   const editProfile = (name, email) => {
-    api.patchProfile(name, email).then(() => {
-      setPopUpOpen(true);
-      setTimeout(() => {
-        setPopUpOpen(false);
-      }, 3000);
-      console.log(popUpOpen);
-      props.setСurrentUser({
-        ...userContext,
-        name,
-        email,
+    if (isButtonActive) {
+      api.patchProfile(name, email).then(() => {
+        setPopUpOpen(true);
+        setTimeout(() => {
+          setPopUpOpen(false);
+        }, 3000);
+        console.log(popUpOpen);
+        props.setСurrentUser({
+          ...userContext,
+          name,
+          email,
+        });
+        setButtonActive(false);
       });
-      setButtonActive(false);
-    });
+    }
   };
   const navigate = useNavigate();
   const logout = () => {
@@ -75,7 +78,7 @@ const Account = (props) => {
           navigate("/");
           localStorage.clear();
           localStorage.setItem("FavoriteMovie", JSON.stringify([]));
-          props.setLoggedIn(false);
+          // props.setLoggedIn(false);
         }
       })
       .catch((err) => {

@@ -39,6 +39,7 @@ const Films = (props) => {
   };
 
   const searchFilms = (e) => {
+    console.log(props.loggedIn);
     e.preventDefault();
     localStorage.setItem("SearchInput", JSON.stringify(searchContent));
     setLoading(true);
@@ -103,6 +104,7 @@ const Films = (props) => {
   };
 
   const GetMovie = (movies) => {
+    console.log(movies);
     if (window.screen.availWidth >= 1280) {
       setmoviesCount(movies.slice(0, 12 + moreCount * 3));
     } else if (
@@ -113,13 +115,15 @@ const Films = (props) => {
     } else {
       setmoviesCount(movies.slice(0, 5 + moreCount * 2));
     }
+    // props.SearchFilter();
   };
 
   useEffect(() => {
+    GetMovie(props.movies);
+    console.log(props.movies);
     if (JSON.parse(localStorage.getItem("SearchInput")) !== null) {
       setSearchContent(JSON.parse(localStorage.getItem("SearchInput")));
     }
-    GetMovie(props.movies);
     setmoreButtonClass("more__button");
     if (props.movies.length <= 12 + moreCount * 3) {
       setmoreButtonClass("more__button_vanished");
@@ -222,7 +226,7 @@ const Films = (props) => {
             </button>
             <label className="search__checkbox">
               <input
-                checked={props.isShortFilms}
+                checked={!JSON.parse(localStorage.getItem("isShort"))}
                 onChange={() => {
                   props.shortFilms();
                 }}

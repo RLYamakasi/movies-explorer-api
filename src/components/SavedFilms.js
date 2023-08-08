@@ -35,20 +35,11 @@ const SavedFilms = (props) => {
   }, []);
 
   const shortFilms = () => {
-    if (
-      props.savedMovies.length === 0 &&
-      localStorage.getItem("FavoriteMovie") === null
-    ) {
-      props.setShortSavedFilms(!props.savedMovies);
-      localStorage.setItem("isShortSaved", props.isShortSavedFilms);
-    } else if (props.isShortSavedFilms === false) {
-      props.setShortSavedFilms(true);
-      localStorage.setItem("isShortSaved", props.isShortSavedFilms);
+    if (JSON.parse(localStorage.getItem("isShortSaved")) === true) {
+      localStorage.setItem("isShortSaved", false);
       props.SearchSavedFilter();
     } else {
-      props.setShortSavedFilms(false);
-
-      localStorage.setItem("isShortSaved", props.isShortSavedFilms);
+      localStorage.setItem("isShortSaved", true);
       props.SearchSavedFilter();
     }
   };

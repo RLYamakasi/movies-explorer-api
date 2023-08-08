@@ -10,48 +10,66 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import { React, useEffect, useState } from "react";
 import { Routes, Route, Redirect, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { api } from "../utils/MainApi";
+import { apiMovie } from "../utils/MoviesApi";
 
 function App() {
+  const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setСurrentUser] = useState([]);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isSideBarOpen, setSideBarOpen] = useState(false);
-  const [isShortFilms, setShortFilms] = useState(
-    localStorage.getItem("isShort") === "true"
-  );
-  const [isShortSavedFilms, setShortSavedFilms] = useState(
-    localStorage.getItem("isShortSaved") === "true"
-  );
+  // const [isShortSavedFilms, setShortSavedFilms] = useState(
+  //   localStorage.getItem("isShortSaved") === "true"
+  // );
+
+  const login = () => {
+    Promise.all([api.getProfile(), apiMovie.getMovies()])
+      .then(([infoResult, moviesResult]) => {
+        setСurrentUser({
+          name: infoResult.name,
+          email: infoResult.email,
+          id: infoResult._id,
+        });
+        localStorage.setItem(
+          "AllFilms",
+          JSON.stringify(moviesResult.reverse())
+        );
+        setMovies(JSON.parse(localStorage.getItem("AllFilms")));
+        localStorage.setItem(
+          "ShortFilms",
+          JSON.stringify(moviesResult.filter((item) => item.duration <= 40))
+        );
+        navigate("/movies");
+        SearchFilter();
+        setLoggedIn(true);
+        console.log(loggedIn, isSideBarOpen);
+      })
+      .catch((err) => {
+        console.log(`Вы неавторизованы ${err}`);
+      });
+  };
 
   useEffect(() => {
     if (window.screen.availWidth <= 1024) {
-      isSideBarOpen(true);
-    }
-    setShortFilms(localStorage.getItem("isShort") === "true");
-    if (localStorage.getItem("isShort") === "true") {
-      shortFilms();
-    } else {
-      localStorage.setItem("isShort", true);
-      SearchFilter();
+      setSideBarOpen(true);
     }
   }, []);
 
   const shortFilms = () => {
-    if (isShortFilms === true) {
-      setShortFilms(false);
-      localStorage.setItem("isShort", isShortFilms);
+    if (JSON.parse(localStorage.getItem("isShort")) === true) {
+      localStorage.setItem("isShort", false);
       SearchFilter();
     } else {
-      setShortFilms(true);
-      localStorage.setItem("isShort", isShortFilms);
+      localStorage.setItem("isShort", true);
       SearchFilter();
     }
   };
 
   const SearchSavedFilter = () => {
     if (JSON.parse(localStorage.getItem("SearchFilm")) === null) {
-      if (isShortSavedFilms) {
+      if (JSON.parse(localStorage.getItem("isShortSaved"))) {
         setSavedMovies(JSON.parse(localStorage.getItem("FavoriteMovie")));
       } else {
         setSavedMovies(
@@ -61,7 +79,7 @@ function App() {
         );
       }
     } else {
-      if (isShortSavedFilms) {
+      if (JSON.parse(localStorage.getItem("isShortSaved"))) {
         setSavedMovies(
           JSON.parse(localStorage.getItem("FavoriteMovie")).filter(
             (item) =>
@@ -104,7 +122,43 @@ function App() {
     <div className="App" lang="ru">
       <CurrentUserContext.Provider value={currentUser}>
         <Routes>
-          <Route path="/" element={<Main loggedIn={loggedIn} />}></Route>
+          <Route element={<ProtectedRoute loggedIn={loggedIn} />}>
+            <Route
+              path="/movies"
+              exact
+              element={
+                <Films
+                  login={login}
+                  shortFilms={shortFilms}
+                  SearchFilter={SearchFilter}
+                  setSavedMovies={setSavedMovies}
+                  setMovies={setMovies}
+                  movies={movies}
+                  savedMovies={savedMovies}
+                />
+              }
+            ></Route>
+            <Route
+              path="/saved-movies"
+              element={
+                <SavedFilms
+                  SearchSavedFilter={SearchSavedFilter}
+                  setSavedMovies={setSavedMovies}
+                  savedMovies={savedMovies}
+                />
+              }
+            ></Route>
+            <Route
+              path="/profile"
+              element={
+                <Account
+                  setLoggedIn={setLoggedIn}
+                  setСurrentUser={setСurrentUser}
+                />
+              }
+            ></Route>
+          </Route>
+          <Route path="/" element={<Main />}></Route>
           <Route
             path="/signup"
             element={
@@ -120,7 +174,7 @@ function App() {
             path="/signin"
             element={
               <Login
-                setShortFilms={setShortFilms}
+                login={login}
                 SearchFilter={SearchFilter}
                 setСurrentUser={setСurrentUser}
                 movies={movies}
@@ -131,58 +185,7 @@ function App() {
               />
             }
           ></Route>
-          <Route path="/error" element={<Error />}></Route>
-          <Route
-            path="/movies"
-            element={
-              <ProtectedRoute
-                element={
-                  <Films
-                    shortFilms={shortFilms}
-                    setShortFilms={setShortFilms}
-                    isShortFilms={isShortFilms}
-                    SearchFilter={SearchFilter}
-                    setSavedMovies={setSavedMovies}
-                    setMovies={setMovies}
-                    movies={movies}
-                    savedMovies={savedMovies}
-                  />
-                }
-                loggedIn={loggedIn}
-              />
-            }
-          ></Route>
-          <Route
-            path="/saved-movies"
-            element={
-              <ProtectedRoute
-                element={
-                  <SavedFilms
-                    setShortSavedFilms={setShortSavedFilms}
-                    isShortSavedFilms={isShortSavedFilms}
-                    SearchSavedFilter={SearchSavedFilter}
-                    setSavedMovies={setSavedMovies}
-                    savedMovies={savedMovies}
-                  />
-                }
-                loggedIn={loggedIn}
-              />
-            }
-          ></Route>
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute
-                element={
-                  <Account
-                    setLoggedIn={setLoggedIn}
-                    setСurrentUser={setСurrentUser}
-                  />
-                }
-                loggedIn={loggedIn}
-              />
-            }
-          ></Route>
+          <Route path="*" element={<Error />}></Route>
         </Routes>
       </CurrentUserContext.Provider>
     </div>
