@@ -39,3 +39,40 @@ module.exports.deleteMovie = (req, res, next) => {
     })
     .catch(next);
 };
+
+
+module.exports.setLikeToMovie = (req, res, next) => {
+  Movies.findByIdAndUpdate(
+    req.params._id,
+    { $addToSet: { likes: req.user._id } },
+    {
+      new: true,
+      runValidators: true,
+    },
+  )
+    .then((movies) => {
+      if (!movies) {
+        return next(new NotFound('фильм не найден'));
+      }
+      return res.status(200).send(movies);
+    })
+    .catch(next);
+};
+
+module.exports.deleteLikeFromMovie = (req, res, next) => {
+  Movies.findByIdAndUpdate(
+    req.params._id,
+    { $pull: { likes: req.user._id } },
+    {
+      new: true,
+      runValidators: true,
+    },
+  )
+    .then((movies) => {
+      if (!movies) {
+        return next(new NotFound('фильм не найден'));
+      }
+      return res.status(200).send(movies);
+    })
+    .catch(next);
+};
