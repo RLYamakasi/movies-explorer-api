@@ -9,7 +9,7 @@ const movieSchema = new mongoose.Schema({
   },
   likes: {
     type: Array,
-    default: [],
+    default: ["11212"],
   },
   director: {
     type: String,
