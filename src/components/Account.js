@@ -75,10 +75,11 @@ const Account = (props) => {
       .clearCookie()
       .then((data) => {
         if (data) {
+          props.setLoggedIn(false);
           navigate("/");
           localStorage.clear();
           localStorage.setItem("FavoriteMovie", JSON.stringify([]));
-          // props.setLoggedIn(false);
+          
         }
       })
       .catch((err) => {

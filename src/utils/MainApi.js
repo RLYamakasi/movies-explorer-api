@@ -73,6 +73,24 @@ export default class MainApi {
     }).then((res) => this._getResponseData(res));
   };
 
+  changeLikeMovieStatus = (id, status) => {
+    if (status) {
+      return fetch(`${this._baseUrl}/movies/${id}`, {
+        method: "DELETE",
+        headers: this._headers,
+        credentials: "include",
+      }).then((res) => this._getResponseData(res));
+    } else {
+      return fetch(`${this._baseUrl}/movies/${id}`, {
+        method: "PUT",
+        headers: this._headers,
+        credentials: "include",
+      }).then((res) => this._getResponseData(res));
+    }
+  };
+
+
+
   addToFavorite = (
     country,
     director,

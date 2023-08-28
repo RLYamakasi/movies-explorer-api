@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom";
 
 const ProtectedRoute = (props) => {
-  return props.loggedIn ? <Outlet /> : <Navigate to="/" />;
+  return JSON.parse(localStorage.getItem("LoggedIn")) ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default ProtectedRoute;

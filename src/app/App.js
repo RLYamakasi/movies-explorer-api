@@ -41,10 +41,11 @@ function App() {
           "ShortFilms",
           JSON.stringify(moviesResult.filter((item) => item.duration <= 40))
         );
-        navigate("/movies");
+        navigate("/");
         SearchFilter();
         setLoggedIn(true);
-        console.log(loggedIn, isSideBarOpen);
+        localStorage.setItem("LoggedIn", true);
+        console.log(loggedIn, isSideBarOpen,JSON.parse(localStorage.getItem("LoggedIn")));
       })
       .catch((err) => {
         console.log(`Вы неавторизованы ${err}`);
@@ -55,6 +56,7 @@ function App() {
     if (window.screen.availWidth <= 1024) {
       setSideBarOpen(true);
     }
+    login()
   }, []);
 
   const shortFilms = () => {
@@ -158,7 +160,7 @@ function App() {
               }
             ></Route>
           </Route>
-          <Route path="/" element={<Main />}></Route>
+          <Route path="/" element={<Main loggedIn={loggedIn}/>}></Route>
           <Route
             path="/signup"
             element={

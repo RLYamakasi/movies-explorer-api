@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { React, useEffect, useState, useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import FavoriteButton from "../components/FavoriteButton";
+import { api } from "../utils/MainApi";
 
 const Films = (props) => {
   const userContext = useContext(CurrentUserContext);
@@ -93,6 +94,7 @@ const Films = (props) => {
       str.push(obj);
       localStorage.setItem("FavoriteMovie", JSON.stringify(str));
       props.setSavedMovies(JSON.parse(localStorage.getItem("FavoriteMovie")));
+      api.changeLikeMovieStatus(obj.id,false)
       setLike(true);
     } else if (localStorage.getItem("FavoriteMovie") === null) {
       localStorage.setItem("FavoriteMovie", JSON.stringify([obj]));
@@ -104,7 +106,7 @@ const Films = (props) => {
   };
 
   const GetMovie = (movies) => {
-    console.log(movies);
+    console.log(movies)
     if (window.screen.availWidth >= 1280) {
       setmoviesCount(movies.slice(0, 12 + moreCount * 3));
     } else if (
@@ -120,7 +122,6 @@ const Films = (props) => {
 
   useEffect(() => {
     GetMovie(props.movies);
-    console.log(props.movies);
     if (JSON.parse(localStorage.getItem("SearchInput")) !== null) {
       setSearchContent(JSON.parse(localStorage.getItem("SearchInput")));
     }
